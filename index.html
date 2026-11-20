@@ -227,13 +227,13 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
     <div class="a-ctrl">
       <div class="grp">
         <h3>Unión de Crédito: nómina semanal</h3>
-        <p>Con tus tres datos del recibo sale tu sueldo bruto exacto: neto + ISR + IMSS. Si entraste en 2026, pon tu fecha de ingreso y el aguinaldo y la PTU salen proporcionales.</p>
+        <p>Con tus tres datos del recibo sale tu sueldo bruto exacto: neto + ISR + IMSS. Si entraste en 2026, pon tu fecha de alta y el aguinaldo y la PTU, de nómina y de por fuera, salen proporcionales.</p>
         <label class="f"><span>Lo que te depositan cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucNeto" data-blank="1" placeholder="0.00" data-k="uc.neto"></span></label>
         <div class="r2">
           <label class="f"><span>ISR que te retienen</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucIsr" data-k="uc.isr" data-blank="1" placeholder="0.00"></span></label>
           <label class="f"><span>IMSS que te retienen</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucImss" data-k="uc.imss" data-blank="1" placeholder="0.00"></span></label>
         </div>
-        <label class="f" style="margin-top:2px"><span>Fecha en que entraste a la Unión</span><span class="well"><input type="date" id="ucIng" data-k="uc.ingreso" min="1990-01-01" max="2026-12-31"></span></label>
+        <label class="f" style="margin-top:2px"><span>Fecha de alta (aplica a nómina y por fuera)</span><span class="well"><input type="date" id="ucIng" data-k="uc.ingreso" min="1990-01-01" max="2026-12-31"></span></label>
         <div class="mini" id="miniUC"></div>
         <div class="mini" id="miniDiasUC" style="margin-top:8px"></div>
       </div>
@@ -241,9 +241,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
         <h3>Unión de Crédito: lo que te dan por fuera</h3>
         <p>No lleva descuentos, así que lo que capturas es lo que recibes.</p>
         <label class="f"><span>Lo que te dan por fuera cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="fuNeto" data-blank="1" placeholder="0.00" data-k="fuera.neto"></span></label>
-        <label class="f"><span>Desde cuándo te dan lo de por fuera (si es otra fecha)</span><span class="well"><input type="date" id="fuIng" data-k="fuera.ingreso" min="1990-01-01" max="2026-12-31"></span></label>
         <div class="mini" id="miniFU"></div>
-        <div class="mini" id="miniDiasFU" style="margin-top:8px"></div>
       </div>
       <div class="grp">
         <h3>Pagos extra en diciembre</h3>
@@ -381,7 +379,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
     <li><b>Aguinaldo de nómina: 15 días.</b> Salario diario × 15. Los primeros 30 UMA ($3,519.30) no pagan ISR. Al resto se le aplica la tasa que resulta del art. 174 del Reglamento del ISR, que es como lo hace NOI. El aguinaldo no lleva descuento de IMSS.</li>
     <li><b>PTU de nómina: 30 días libres.</b> Primero se fija lo que debes recibir (salario diario × 30) y luego se calcula cuánto tiene que pagar la empresa en bruto para que, quitando el ISR, te quede exactamente esa cantidad. Los primeros 15 UMA ($1,759.65) no pagan ISR, y la PTU no lleva IMSS.</li>
     <li><b>Lo de por fuera.</b> No tiene descuentos: lo semanal entre 7 es el salario diario; × 15 es el aguinaldo y × 30 la PTU.</li>
-    <li><b>Si no trabajaste el año completo.</b> Con tu fecha de ingreso se cuentan los días trabajados en 2026, de esa fecha al 31 de diciembre. El aguinaldo y la PTU se pagan en proporción: días de prestación × días trabajados ÷ 365. Ejemplo: si entraste el 1 de julio llevas 184 días, así que te tocan 15 × 184 ÷ 365 = 7.56 días de aguinaldo. Lo de por fuera usa su propia fecha si es distinta; si la dejas vacía, usa la de nómina. Si entraste antes de 2026 o dejas la fecha vacía, cuenta el año completo.</li>
+    <li><b>Si no trabajaste el año completo.</b> Con tu fecha de alta se cuentan los días trabajados en 2026, de esa fecha al 31 de diciembre. El aguinaldo y la PTU se pagan en proporción: días de prestación × días trabajados ÷ 365. Ejemplo: si entraste el 1 de julio llevas 184 días, así que te tocan 15 × 184 ÷ 365 = 7.56 días de aguinaldo. La misma fecha de alta se usa para lo de nómina y lo de por fuera. Si entraste antes de 2026 o dejas la fecha vacía, cuenta el año completo.</li>
     <li><b>Semanas de descanso adelantadas.</b> El descanso de 14 días son 2 semanas que te pagan por adelantado antes de salir. Cada semana vale lo de nómina más lo de por fuera. No hay prima vacacional porque no son vacaciones. Tus semanas normales de diciembre no se suman aquí.</li>
     <li><b>Si tienes otro trabajo.</b> Cada patrón te exenta 30 UMA del aguinaldo, pero en la declaración anual solo te toca una exención y un subsidio, así que podría salirte algo de ISR a pagar en abril. Este total es lo que te cae en diciembre, no el impuesto final.</li>
   </ol>
@@ -562,7 +560,7 @@ var CALC = (function () {
     var R = { subM: subMensual(par) };
     R.semUC = sueldo(uc, 7, par);
     R.diasUC = diasTrab(uc.ingreso, st.year); if (R.diasUC === null) R.diasUC = Math.min(365, +uc.laborados || 365);
-    R.diasFU = diasTrab(fu.ingreso, st.year); if (R.diasFU === null) R.diasFU = R.diasUC;
+    R.diasFU = R.diasUC; // una sola fecha de alta para nómina y por fuera
     R.propUC = Math.min(R.diasUC, 365) / 365; R.propFU = Math.min(R.diasFU, 365) / 365;
     R.qnaRO = ro ? sueldo(ro, 15, par) : null;
     if (R.semUC) {
@@ -722,7 +720,6 @@ function render() {
   $('#miniEX').innerHTML = '<span>Cada semana extra</span><span>' + m(R.semanal) + '</span>';
   const dLbl = d => d >= 365 ? 'año completo' : d + ' de 365 días (' + (d / 365 * 100).toFixed(2) + ' %)';
   $('#miniDiasUC').innerHTML = '<span>' + (st.uc.ingreso ? 'Desde ' + new Date(st.uc.ingreso + 'T12:00:00Z').toLocaleDateString('es-MX', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}) : 'Trabajados en ' + st.year) + '</span><span>' + (st.uc.ingreso && R.diasUC === 0 ? 'fecha después de ' + st.year : dLbl(R.diasUC)) + '</span>';
-  $('#miniDiasFU').innerHTML = '<span>' + (st.fuera.ingreso ? 'Por fuera desde ' + new Date(st.fuera.ingreso + 'T12:00:00Z').toLocaleDateString('es-MX', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}) : 'Por fuera en ' + st.year) + '</span><span>' + dLbl(R.diasFU) + (st.fuera.ingreso ? '' : ' · misma fecha') + '</span>';
   $('#miniFU').innerHTML = '<span>Diario por fuera</span><span>' + m(R.sdFuera) + '</span>';
 
   // Calendario
@@ -750,7 +747,7 @@ function render() {
   h += tk('Unión: tu sueldo semanal', s && s.modo === 'recibo' ? 'Con tu recibo se reconstruye el sueldo bruto, que es la base del aguinaldo y la PTU.' : 'Sin retenciones capturadas, el bruto se estima con la tarifa 2026.', sueldoRows(s, 'semanal'));
   if (R.aguiUC) { const a = R.aguiUC; h += tk('Unión: aguinaldo de nómina', 'Lo que marca la ley: 15 días de salario, con su ISR.', [['Salario diario bruto', m(a.SD)], diasRow('aguinaldo', a.dias, R.diasUC), ['= Aguinaldo bruto', m(a.bruto), 'sum']].concat(gratRows(a, 30)).concat([['Aguinaldo que recibes', m(a.neto), 'sum']])); }
   if (R.ptuUC) { const p = R.ptuUC; h += tk('Unión: PTU de 30 días libres', 'Primero se fija lo que debes recibir y luego se calcula el bruto que cubre el ISR.', [['Salario diario ' + st.uc.ptuBase, m(p.basePTU)], diasRow('PTU', st.uc.ptuDias, R.diasUC), ['= Lo que debes recibir', m(p.objetivo), 'sum'], ['PTU bruta que paga la empresa', m(p.bruto)]].concat(gratRows(p, 15)).concat([p.extra ? ['Otra retención absorbida', m(p.extra)] : null, ['PTU que recibes', m(p.neto), 'sum'], ['Contra lo que debes recibir', chk(p.difNeto)]])); }
-  h += tk('Por fuera: aguinaldo y PTU', 'Sin descuentos de ningún tipo.', [['Te dan por semana', m(st.fuera.neto)], ['÷ 7 = salario diario', m(R.sdFuera), 'sum'], R.diasFU < 365 ? ['Días con lo de por fuera en ' + st.year, R.diasFU + ' de 365'] : null, ['Aguinaldo<small>' + st.fuera.aguiDias + ' días × ' + (R.diasFU < 365 ? R.diasFU + ' ÷ 365 × ' : '') + m(R.sdFuera) + '</small>', m(R.aguiFuera)], ['PTU<small>' + st.fuera.ptuDias + ' días × ' + (R.diasFU < 365 ? R.diasFU + ' ÷ 365 × ' : '') + m(R.sdFuera) + '</small>', m(R.ptuFuera)], ['Total por fuera', m(R.aguiFuera + R.ptuFuera), 'sum']]);
+  h += tk('Por fuera: aguinaldo y PTU', 'Sin descuentos de ningún tipo.', [['Te dan por semana', m(st.fuera.neto)], ['÷ 7 = salario diario', m(R.sdFuera), 'sum'], R.diasFU < 365 ? ['Días trabajados en ' + st.year + '<small>desde tu fecha de alta</small>', R.diasFU + ' de 365'] : null, ['Aguinaldo<small>' + st.fuera.aguiDias + ' días × ' + (R.diasFU < 365 ? R.diasFU + ' ÷ 365 × ' : '') + m(R.sdFuera) + '</small>', m(R.aguiFuera)], ['PTU<small>' + st.fuera.ptuDias + ' días × ' + (R.diasFU < 365 ? R.diasFU + ' ÷ 365 × ' : '') + m(R.sdFuera) + '</small>', m(R.ptuFuera)], ['Total por fuera', m(R.aguiFuera + R.ptuFuera), 'sum']]);
   h += tk('Unión: semanas de descanso adelantadas', 'Las semanas que te pagan antes de irte de descanso. Cada una incluye nómina y por fuera.', [['Semanas de descanso', String(R.nAdel)], ['Nómina<small>' + R.nAdel + ' × ' + m(st.uc.neto) + '</small>', m(R.lineas[0].det[0].v)], ['Por fuera<small>' + R.nAdel + ' × ' + m(st.fuera.neto) + '</small>', m(R.lineas[0].det[1].v)], ['Total adelantado', m(R.lineas[0].v), 'sum']]);
   if (R.nExtra || R.nQna) {
     const ex = R.lineas.find(l => l.k === 'extra'), q = R.lineas.find(l => l.k === 'roQna');
