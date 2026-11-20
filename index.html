@@ -226,7 +226,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
       <div class="grp">
         <h3>Unión de Crédito: nómina semanal</h3>
         <p>Con tus tres datos del recibo sale tu sueldo bruto exacto: neto + ISR + IMSS.</p>
-        <label class="f"><span>Lo que te depositan cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucNeto" data-k="uc.neto"></span></label>
+        <label class="f"><span>Lo que te depositan cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucNeto" data-blank="1" placeholder="0.00" data-k="uc.neto"></span></label>
         <div class="r2">
           <label class="f"><span>ISR que te retienen</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucIsr" data-k="uc.isr" data-blank="1" placeholder="0.00"></span></label>
           <label class="f"><span>IMSS que te retienen</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucImss" data-k="uc.imss" data-blank="1" placeholder="0.00"></span></label>
@@ -236,7 +236,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
       <div class="grp">
         <h3>Unión de Crédito: lo que te dan por fuera</h3>
         <p>No lleva descuentos, así que lo que capturas es lo que recibes.</p>
-        <label class="f"><span>Lo que te dan por fuera cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="fuNeto" data-k="fuera.neto"></span></label>
+        <label class="f"><span>Lo que te dan por fuera cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="fuNeto" data-blank="1" placeholder="0.00" data-k="fuera.neto"></span></label>
         <div class="mini" id="miniFU"></div>
       </div>
       <div class="grp">
@@ -247,8 +247,8 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
         </div>
         <div class="mini" id="miniEX"></div>
       </div>
-      <div class="keys"><button type="button" class="key or" id="goPrint">Imprimir ticket</button><button type="button" class="key" id="copy">Copiar texto</button><button type="button" class="key" id="calcBtn">Calculadora (F10)</button><button type="button" class="key" id="reset">Restablecer</button></div>
-      <p class="msg" id="msg" role="status">Vienen datos de ejemplo: cámbialos por los de tu recibo. Lo que captures se queda solo en tu navegador; nadie más lo ve.</p>
+      <div class="keys"><button type="button" class="key or" id="goPrint">Imprimir ticket</button><button type="button" class="key" id="copy">Copiar texto</button><button type="button" class="key" id="calcBtn">Calculadora (F10)</button><button type="button" class="key" id="reset">Borrar mis datos</button></div>
+      <p class="msg" id="msg" role="status">Captura los datos de tu recibo semanal. Lo que escribas se queda solo en tu navegador: no se manda a ningún lado y nadie más lo ve.</p>
     </div>
 
     <div class="a-tape">
@@ -593,11 +593,11 @@ var CALC = (function () {
 {
 const C = CALC;
 const DEF = {year:2026,payDow:5,ranges:[{a:'2026-12-22',b:'2027-01-04'}],adjOrd:0,adjAdel:0,extraSem:0,
-  uc:{neto:2506.32,isr:222,imss:71.68,regimen:'02',aguiDias:15,laborados:365,otras:0,ptuDias:30,ptuBase:'bruto',ptuExtra:0},
-  fuera:{neto:1500,aguiDias:15,ptuDias:30},
+  uc:{neto:0,isr:0,imss:0,regimen:'02',aguiDias:15,laborados:365,otras:0,ptuDias:30,ptuBase:'bruto',ptuExtra:0},
+  fuera:{neto:0,aguiDias:15,ptuDias:30},
   par:{uma:117.31,umaM:3566.22,subPct:15.02,subLim:11492.66,metodo:'174',sdQna:'mes',factor:1.0493,imssExc:0.40,imssPd:0.25,imssGmp:0.375,imssIv:0.625,imssCv:1.125},
   incl:{adel:true,extra:true,ucAgui:true,ucPtu:true,fAgui:true,fPtu:true,roAgui:true}};
-const KEY = 'union-dic2026-v1';
+const KEY = 'union-dic2026-v2';
 const clone = o => JSON.parse(JSON.stringify(o));
 const merge = (a, b) => { for (const k in b) { if (!(k in a)) continue; if (b[k] && typeof b[k] === 'object' && !Array.isArray(b[k]) && a[k] && typeof a[k] === 'object') merge(a[k], b[k]); else a[k] = b[k]; } return a; };
 let st = clone(DEF);
@@ -691,6 +691,7 @@ function render() {
     tape += '<div class="tg2"><span>' + g + '</span><span>' + n(ls.reduce((s, l) => s + l.v, 0)) + '</span></div>';
     tape += ls.map(l => '<div class="tl"><span>' + l.t + '</span><span class="v">' + n(l.v) + ' +</span>' + (l.det ? l.det.map(d => '<small>' + d.t + ': ' + d.k + ' × ' + n(d.u) + ' = ' + n(d.v) + '</small>').join('') : '<small>' + l.e + '</small>') + '</div>').join('');
   });
+  if (!R.lineas.some(l => st.incl[l.k] && l.v !== 0)) tape += '<div class="tl"><span>Captura tus datos para empezar a sumar.</span><span class="v"></span></div>';
   tape += '<div class="tt"><span>Total</span><span>' + n(R.total) + ' *</span></div>';
   $('#tape').innerHTML = tape;
 
@@ -738,6 +739,7 @@ function render() {
       ['Total pagos extra', m((R.nExtra ? ex.v : 0) + (R.nQna ? q.v : 0)), 'sum']]);
   }
   $('#tks').innerHTML = h;
+  if (!s) { $('#mm1').textContent = 'neto + ISR + IMSS de tu recibo = tu sueldo bruto semanal; entre 7 da tu salario diario.'; $('#mm2').textContent = 'Con la tarifa semanal 2026 del SAT se calcula el ISR de ese sueldo, se le resta el subsidio para el empleo y debe dar lo mismo que tu recibo.'; }
   if (s) {
     const p = s.modelo;
     $('#mm1').textContent = s.modo === 'recibo' ? m(s.neto) + ' + ' + m(s.isr) + ' de ISR + ' + m(s.imss) + ' de IMSS' + (s.otras ? ' + ' + m(s.otras) + ' de otros descuentos' : '') + ' = ' + m(s.bruto) + ' a la semana. Entre 7 días da tu salario diario de ' + m(s.SD) + '.' : 'como no capturaste retenciones, se busca el salario diario cuyo neto da ' + m(s.neto) + ': ' + m(s.SD) + ' (bruto semanal ' + m(s.bruto) + ').';
@@ -775,7 +777,7 @@ $('#radd').addEventListener('click', () => {
   if (!a || !b) { $('#msg').textContent = 'Captura las dos fechas del descanso.'; return; }
   st.ranges.push({a: a < b ? a : b, b: a < b ? b : a}); $('#ra').value = ''; $('#rb').value = ''; save(); render();
 });
-$('#reset').addEventListener('click', () => { st = clone(DEF); pend = null; save(); bind(); render(); $('#msg').textContent = 'Se restablecieron los datos de ejemplo.'; });
+$('#reset').addEventListener('click', () => { st = clone(DEF); pend = null; save(); bind(); render(); $('#msg').textContent = 'Se borraron tus datos de este navegador.'; });
 $('#copy').addEventListener('click', () => {
   const R = window.__R;
   const txt = ['Ingresos estimados diciembre ' + st.year, ''].concat(R.lineas.filter(l => st.incl[l.k]).map(l => l.g + ' | ' + l.t + ': ' + m(l.v)), ['', 'TOTAL: ' + m(R.total)]).join('\n');
