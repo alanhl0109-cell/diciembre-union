@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
 <title>Diciembre 2026 Unión</title>
+<script>try{var t=localStorage.getItem("tema-sumadora");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
@@ -72,7 +73,7 @@ input,select,button{font:inherit;font-size:16px}
 .well:focus-within{box-shadow:inset 0 2px 4px rgba(0,0,0,.28),0 0 0 2px var(--or)}
 .mini{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:"Share Tech Mono",monospace;font-size:15px;color:var(--lcdink);background:linear-gradient(170deg,var(--lcd1),var(--lcd2));border-radius:5px;padding:6px 10px;box-shadow:inset 0 2px 5px rgba(0,0,0,.4),0 1px 0 var(--emb)}
 .key{height:44px;padding:0 16px;border-radius:8px;border:1px solid rgba(0,0,0,.28);cursor:pointer;color:var(--ink);background:linear-gradient(180deg,var(--key1),var(--key2));box-shadow:0 3px 0 var(--keye),0 5px 8px -2px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .06s,box-shadow .06s}
-.key:active{transform:translateY(2px);box-shadow:0 1px 0 var(--keye),0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.5)}
+.key.down,.key:active{transform:translateY(2px);box-shadow:0 1px 0 var(--keye),0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.5)}
 .key.or{background:linear-gradient(180deg,#f07a35,var(--or));color:#fff;border-color:var(--or2);box-shadow:0 3px 0 var(--or2),0 5px 8px -2px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35)}
 .key:focus-visible,.d:focus-visible,.sw:focus-visible{outline:2px solid var(--or);outline-offset:2px}
 .keys{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
@@ -164,6 +165,39 @@ details.svc summary span{font-weight:400;font-size:15px;color:var(--mute)}
 .how li{margin-bottom:10px;max-width:52ch;text-shadow:0 1px 0 var(--emb)}
 @media(max-width:900px){.prn{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.printing .feed{animation:none;height:var(--h)}.printing .pbody,.printing .pbody .led{animation:none}}
+.plr{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap}
+.thm{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mute);text-shadow:0 1px 0 var(--emb)}
+.thm>span{display:inline-flex;align-items:center;gap:5px}
+.thm svg{width:18px;height:18px;flex:none}
+.thm .on{color:var(--ink);font-weight:600}
+.tsw{position:relative;width:62px;height:32px;padding:0;border-radius:16px;border:1px solid rgba(0,0,0,.35);cursor:pointer;background:linear-gradient(180deg,#2e3135,#4a4e54);box-shadow:inset 0 2px 4px rgba(0,0,0,.65),0 1px 0 var(--emb)}
+.tsw::before{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fff,#d4d6d8 55%,#9da2a7);box-shadow:0 2px 3px rgba(0,0,0,.55),inset 0 -1px 1px rgba(0,0,0,.2);transition:left .18s}
+.tsw::after{content:"";position:absolute;top:13px;left:12px;width:6px;height:6px;border-radius:50%;background:#5a3a2a;box-shadow:inset 0 1px 1px rgba(0,0,0,.6);transition:left .18s}
+.tsw[aria-checked=true]::before{left:33px}
+.tsw[aria-checked=true]::after{left:42px;background:radial-gradient(circle at 40% 35%,#ffd2b0,var(--led) 55%,#c4500f);box-shadow:0 0 6px var(--led)}
+.tsw:focus-visible{outline:2px solid var(--or);outline-offset:2px}
+body{transition:background-color .25s,color .25s}
+@media(prefers-reduced-motion:reduce){.tsw::before,.tsw::after,body{transition:none}}
+.calc{position:fixed;right:20px;bottom:20px;z-index:50;width:304px;border-radius:18px;padding:14px 14px 16px;color:var(--ink);
+background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 2px,rgba(0,0,0,.025) 2px 3px),linear-gradient(180deg,var(--alu1),var(--alu2));
+box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 24px 50px -14px rgba(0,0,0,.6),0 3px 8px rgba(0,0,0,.3);animation:calcin .18s ease-out}
+@keyframes calcin{from{transform:translateY(16px);opacity:0}}
+.calc .ch{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.calc .ch b{font-size:15px;text-shadow:0 1px 0 var(--emb)}
+.calc .ch kbd{font:12px "IBM Plex Mono",monospace;padding:2px 6px;border-radius:4px;background:var(--well);box-shadow:inset 0 1px 2px rgba(0,0,0,.25);color:var(--mute);margin-left:6px}
+.calc .x{width:36px;height:36px;padding:0;font-size:20px;line-height:1}
+.clcd{border-radius:6px;padding:8px 12px;margin-bottom:12px;text-align:right;font-family:"Share Tech Mono",monospace;color:var(--lcdink);background:linear-gradient(170deg,var(--lcd1),var(--lcd2));box-shadow:inset 0 3px 8px rgba(0,0,0,.45),0 0 0 6px #25272b,0 1px 0 6px var(--emb)}
+.clcd .ex{font-size:14px;min-height:20px;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clcd .cv{font-size:34px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.ck{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ck .key{height:46px;padding:0;font-size:19px;font-family:"Barlow",sans-serif;font-weight:600}
+.ck .key.op{background:linear-gradient(180deg,#5b5f65,#3d4045);color:#fff;border-color:#232528;box-shadow:0 3px 0 #1d1f22,0 5px 8px -2px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.2)}
+.ck .key.fn{font-size:15px;color:var(--or2)}
+.cx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.cx .key{height:40px;font-size:14px;padding:0 8px}
+.cmsg{font-size:13px;color:var(--mute);min-height:18px;margin:8px 2px 0;text-align:center}
+@media(max-width:600px){.calc{left:10px;right:10px;bottom:10px;width:auto}}
+@media(prefers-reduced-motion:reduce){.calc{animation:none}}
 @media(max-width:900px){.top{grid-template-columns:minmax(0,1fr);grid-template-areas:"lcd" "ctrl" "tape"}.cal{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:560px){.months{grid-template-columns:minmax(0,1fr)}.tape{margin:-5px 8px 0;padding:16px 12px 24px}.r2{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.key,.sw::before,details.svc summary::before{transition:none}}
@@ -177,7 +211,7 @@ details.svc summary span{font-weight:400;font-size:15px;color:var(--mute)}
 </header>
 
 <section class="mod wrap" aria-label="Total y captura">
-  <div class="plate"><h2>Sumadora de fin de año</h2><span class="pwr"><span class="led g"></span>Parámetros fiscales 2026</span></div>
+  <div class="plate"><h2>Sumadora de fin de año</h2><div class="plr"><span class="pwr"><span class="led g"></span>Parámetros fiscales 2026</span><div class="thm"><span id="thL"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></g></svg>Claro</span><button type="button" class="tsw" id="themeBtn" role="switch" aria-checked="false" aria-label="Modo oscuro"></button><span id="thD"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8z"/></svg>Oscuro</span></div></div></div>
   <div class="top">
     <div class="a-lcd">
       <div class="bezel"><div class="lcd">
@@ -213,7 +247,7 @@ details.svc summary span{font-weight:400;font-size:15px;color:var(--mute)}
         </div>
         <div class="mini" id="miniEX"></div>
       </div>
-      <div class="keys"><button type="button" class="key or" id="goPrint">Imprimir ticket</button><button type="button" class="key" id="copy">Copiar texto</button><button type="button" class="key" id="reset">Restablecer</button></div>
+      <div class="keys"><button type="button" class="key or" id="goPrint">Imprimir ticket</button><button type="button" class="key" id="copy">Copiar texto</button><button type="button" class="key" id="calcBtn">Calculadora (F10)</button><button type="button" class="key" id="reset">Restablecer</button></div>
       <p class="msg" id="msg" role="status">Vienen datos de ejemplo: cámbialos por los de tu recibo. Lo que captures se queda solo en tu navegador; nadie más lo ve.</p>
     </div>
 
@@ -348,6 +382,19 @@ details.svc summary span{font-weight:400;font-size:15px;color:var(--mute)}
 </article>
 
 <p class="foot wrap">Fuentes: <a href="https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/anexos/Anexo-8-RMF-2026_DOF-28122025.pdf">Anexo 8 RMF 2026 (SAT)</a>; UMA 2026 $117.31 diaria y $3,566.22 mensual (INEGI, DOF 09-01-2026); subsidio para el empleo 15.02 % de la UMA mensual con tope de $11,492.66 (DOF 31-12-2025). Es una estimación de apoyo; mandan los recibos timbrados de cada empresa.</p>
+</div>
+<div class="calc" id="calc" role="dialog" aria-label="Calculadora" hidden>
+  <div class="ch"><b>Calculadora<kbd>F10</kbd></b><button type="button" class="key x" id="calcX" aria-label="Cerrar calculadora">×</button></div>
+  <div class="clcd" aria-live="polite"><div class="ex" id="cEx">&nbsp;</div><div class="cv" id="cVal">0</div></div>
+  <div class="ck" id="cKeys">
+    <button type="button" class="key fn" data-c="AC">AC</button><button type="button" class="key fn" data-c="BS" aria-label="Borrar">⌫</button><button type="button" class="key op" data-c="%">%</button><button type="button" class="key op" data-c="/">÷</button>
+    <button type="button" class="key" data-c="7">7</button><button type="button" class="key" data-c="8">8</button><button type="button" class="key" data-c="9">9</button><button type="button" class="key op" data-c="*">×</button>
+    <button type="button" class="key" data-c="4">4</button><button type="button" class="key" data-c="5">5</button><button type="button" class="key" data-c="6">6</button><button type="button" class="key op" data-c="-">−</button>
+    <button type="button" class="key" data-c="1">1</button><button type="button" class="key" data-c="2">2</button><button type="button" class="key" data-c="3">3</button><button type="button" class="key op" data-c="+">+</button>
+    <button type="button" class="key" data-c="NEG" aria-label="Cambiar signo">±</button><button type="button" class="key" data-c="0">0</button><button type="button" class="key" data-c=".">.</button><button type="button" class="key or" data-c="=">=</button>
+  </div>
+  <div class="cx"><button type="button" class="key" id="cTot">Traer total</button><button type="button" class="key" id="cCopy">Copiar resultado</button></div>
+  <p class="cmsg" id="cMsg">Usa el teclado: números, + − * /, Enter y Esc.</p>
 </div>
 
 <script>
@@ -891,6 +938,83 @@ $('#tkSave').addEventListener('click', async () => {
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
     $('#tkMsg').textContent = 'Imagen descargada; mándala por WhatsApp desde tus archivos.';
   } catch (e) { $('#tkMsg').textContent = e && (e.code === 'declined' || e.name === 'AbortError') ? 'Se canceló.' : 'No se pudo guardar aquí; mantén presionado el ticket para copiarlo.'; }
+});
+// ---------- Interruptor claro / oscuro ----------
+const mqDark = matchMedia('(prefers-color-scheme: dark)');
+const isDark = () => { const t = document.documentElement.getAttribute('data-theme'); return t ? t === 'dark' : mqDark.matches; };
+const paintTheme = () => { const d = isDark(); $('#themeBtn').setAttribute('aria-checked', String(d)); $('#thL').classList.toggle('on', !d); $('#thD').classList.toggle('on', d); };
+$('#themeBtn').addEventListener('click', () => {
+  const t = isDark() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  try { localStorage.setItem('tema-sumadora', t); } catch (e) {}
+  paintTheme();
+});
+try { mqDark.addEventListener('change', paintTheme); } catch (e) {}
+try { new MutationObserver(paintTheme).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']}); } catch (e) {}
+paintTheme();
+// ---------- Calculadora (F10) ----------
+const CS = {cur: '0', acc: null, op: null, fresh: true, ex: ''};
+const SYM = {'+': '+', '-': '−', '*': '×', '/': '÷'};
+const rnd = x => Math.round(x * 1e10) / 1e10;
+const fmtN = x => { if (!isFinite(x)) return 'Error'; return new Intl.NumberFormat('es-MX', {maximumFractionDigits: 10}).format(rnd(x)); };
+const fmtCur = c => { if (c === 'Error') return c; const neg = c[0] === '-', b = neg ? c.slice(1) : c, [i, d] = b.split('.'); return (neg ? '−' : '') + new Intl.NumberFormat('es-MX').format(+i || 0) + (d !== undefined ? '.' + d : ''); };
+const cOp = (a, b, o) => o === '+' ? a + b : o === '-' ? a - b : o === '*' ? a * b : b === 0 ? NaN : a / b;
+function cDraw() { $('#cVal').textContent = fmtCur(CS.cur); $('#cEx').textContent = CS.ex || '\u00a0'; }
+function cPress(k) {
+  if (CS.cur === 'Error' && k !== 'AC') { CS.cur = '0'; CS.acc = null; CS.op = null; CS.fresh = true; CS.ex = ''; }
+  if (/^[0-9]$/.test(k) || k === '.') {
+    if (CS.fresh) { CS.cur = k === '.' ? '0.' : k; CS.fresh = false; }
+    else if (k === '.') { if (!CS.cur.includes('.')) CS.cur += '.'; }
+    else if (CS.cur.replace(/[-.]/g, '').length < 15) CS.cur = CS.cur === '0' ? k : CS.cur === '-0' ? '-' + k : CS.cur + k;
+  } else if (SYM[k]) {
+    if (CS.acc !== null && CS.op && !CS.fresh) CS.acc = rnd(cOp(CS.acc, +CS.cur, CS.op));
+    else if (CS.acc === null) CS.acc = +CS.cur;
+    CS.op = k; CS.fresh = true;
+    if (!isFinite(CS.acc)) { CS.cur = 'Error'; CS.acc = null; CS.op = null; CS.ex = ''; }
+    else { CS.cur = String(CS.acc); CS.ex = fmtN(CS.acc) + ' ' + SYM[k]; }
+  } else if (k === '=') {
+    if (CS.op && CS.acc !== null) {
+      const b = +CS.cur, r = rnd(cOp(CS.acc, b, CS.op));
+      CS.ex = fmtN(CS.acc) + ' ' + SYM[CS.op] + ' ' + fmtN(b) + ' =';
+      CS.cur = isFinite(r) ? String(r) : 'Error'; CS.acc = null; CS.op = null; CS.fresh = true;
+    }
+  } else if (k === '%') {
+    const v = +CS.cur;
+    CS.cur = String(rnd(CS.acc !== null && (CS.op === '+' || CS.op === '-') ? CS.acc * v / 100 : v / 100)); CS.fresh = false;
+  } else if (k === 'NEG') {
+    if (CS.cur !== '0') CS.cur = CS.cur[0] === '-' ? CS.cur.slice(1) : '-' + CS.cur;
+  } else if (k === 'BS') {
+    if (!CS.fresh) { CS.cur = CS.cur.slice(0, -1); if (CS.cur === '' || CS.cur === '-') { CS.cur = '0'; CS.fresh = true; } }
+  } else if (k === 'AC') { CS.cur = '0'; CS.acc = null; CS.op = null; CS.fresh = true; CS.ex = ''; }
+  cDraw();
+}
+const calcOpen = () => !$('#calc').hidden;
+function calcToggle(show) {
+  const el = $('#calc'), on = show === undefined ? el.hidden : show;
+  el.hidden = !on;
+  if (on) { cDraw(); el.querySelector('[data-c="="]').focus({preventScroll: true}); }
+}
+$('#calcBtn').addEventListener('click', () => calcToggle(true));
+$('#calcX').addEventListener('click', () => calcToggle(false));
+$('#cKeys').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (b) cPress(b.dataset.c); });
+$('#cTot').addEventListener('click', () => { CS.cur = String(window.__R ? window.__R.total : 0); CS.acc = null; CS.op = null; CS.fresh = true; CS.ex = 'Total de diciembre'; cDraw(); $('#cMsg').textContent = 'Total de la sumadora en pantalla.'; });
+$('#cCopy').addEventListener('click', () => {
+  const t = CS.cur === 'Error' ? '' : String(rnd(+CS.cur));
+  try { navigator.clipboard.writeText(t).then(() => { $('#cMsg').textContent = 'Resultado copiado: ' + t; }, () => { $('#cMsg').textContent = 'No se pudo copiar aquí.'; }); }
+  catch (e) { $('#cMsg').textContent = 'No se pudo copiar aquí.'; }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'F10') { e.preventDefault(); calcToggle(); return; }
+  if (!calcOpen()) return;
+  if (e.key === 'Escape') { e.preventDefault(); calcToggle(false); return; }
+  const tg = e.target, typing = tg && (tg.tagName === 'INPUT' || tg.tagName === 'SELECT' || tg.tagName === 'TEXTAREA') && !tg.closest('#calc');
+  if (typing || e.ctrlKey || e.metaKey || e.altKey) return;
+  const map = {Enter: '=', '=': '=', Backspace: 'BS', Delete: 'AC', ',': '.', x: '*', X: '*'};
+  const k = map[e.key] || e.key;
+  if (/^[0-9]$/.test(k) || ['.', '+', '-', '*', '/', '%', '=', 'BS', 'AC'].includes(k)) {
+    e.preventDefault(); cPress(k);
+    const b = $('#cKeys [data-c="' + k + '"]'); if (b) { b.classList.add('down'); setTimeout(() => b.classList.remove('down'), 110); }
+  }
 });
 bind();
 render();
