@@ -69,6 +69,7 @@ input,select,button{font:inherit;font-size:16px}
 .well{display:flex;align-items:center;height:44px;border-radius:7px;background:var(--well);color:var(--wellink);box-shadow:inset 0 2px 4px rgba(0,0,0,.28),0 1px 0 var(--emb);padding:0 10px}
 .well b{font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--mute);margin-right:4px}
 .well input,.well select{flex:1;width:100%;height:100%;border:0;background:transparent;color:inherit;font-family:"IBM Plex Mono",monospace;font-size:16px;text-align:right;outline:none}
+.well input[type=date]{text-align:left;min-height:42px}
 .well select{text-align:left;font-family:"Barlow",sans-serif;cursor:pointer}
 .well:focus-within{box-shadow:inset 0 2px 4px rgba(0,0,0,.28),0 0 0 2px var(--or)}
 .mini{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:"Share Tech Mono",monospace;font-size:15px;color:var(--lcdink);background:linear-gradient(170deg,var(--lcd1),var(--lcd2));border-radius:5px;padding:6px 10px;box-shadow:inset 0 2px 5px rgba(0,0,0,.4),0 1px 0 var(--emb)}
@@ -226,19 +227,23 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
     <div class="a-ctrl">
       <div class="grp">
         <h3>Unión de Crédito: nómina semanal</h3>
-        <p>Con tus tres datos del recibo sale tu sueldo bruto exacto: neto + ISR + IMSS.</p>
+        <p>Con tus tres datos del recibo sale tu sueldo bruto exacto: neto + ISR + IMSS. Si entraste en 2026, pon tu fecha de ingreso y el aguinaldo y la PTU salen proporcionales.</p>
         <label class="f"><span>Lo que te depositan cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucNeto" data-blank="1" placeholder="0.00" data-k="uc.neto"></span></label>
         <div class="r2">
           <label class="f"><span>ISR que te retienen</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucIsr" data-k="uc.isr" data-blank="1" placeholder="0.00"></span></label>
           <label class="f"><span>IMSS que te retienen</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucImss" data-k="uc.imss" data-blank="1" placeholder="0.00"></span></label>
         </div>
+        <label class="f" style="margin-top:2px"><span>Fecha en que entraste a la Unión</span><span class="well"><input type="date" id="ucIng" data-k="uc.ingreso" min="1990-01-01" max="2026-12-31"></span></label>
         <div class="mini" id="miniUC"></div>
+        <div class="mini" id="miniDiasUC" style="margin-top:8px"></div>
       </div>
       <div class="grp">
         <h3>Unión de Crédito: lo que te dan por fuera</h3>
         <p>No lleva descuentos, así que lo que capturas es lo que recibes.</p>
         <label class="f"><span>Lo que te dan por fuera cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="fuNeto" data-blank="1" placeholder="0.00" data-k="fuera.neto"></span></label>
+        <label class="f"><span>Desde cuándo te dan lo de por fuera (si es otra fecha)</span><span class="well"><input type="date" id="fuIng" data-k="fuera.ingreso" min="1990-01-01" max="2026-12-31"></span></label>
         <div class="mini" id="miniFU"></div>
+        <div class="mini" id="miniDiasFU" style="margin-top:8px"></div>
       </div>
       <div class="grp">
         <h3>Pagos extra en diciembre</h3>
@@ -327,7 +332,6 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
         <h3>Unión de Crédito</h3>
         <div class="r2">
           <label class="f"><span>Días de aguinaldo</span><span class="well"><input type="number" step="1" min="0" data-k="uc.aguiDias"></span></label>
-          <label class="f"><span>Días trabajados en 2026</span><span class="well"><input type="number" step="1" min="0" max="365" data-k="uc.laborados"></span></label>
           <label class="f"><span>Días de PTU (libres)</span><span class="well"><input type="number" step="1" min="0" data-k="uc.ptuDias"></span></label>
           <label class="f"><span>PTU sobre</span><span class="well"><select data-k="uc.ptuBase"><option value="bruto">Salario diario bruto</option><option value="neto">Salario diario neto</option></select></span></label>
           <label class="f"><span>Otros descuentos semanales</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" data-k="uc.otras"></span></label>
@@ -377,6 +381,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
     <li><b>Aguinaldo de nómina: 15 días.</b> Salario diario × 15. Los primeros 30 UMA ($3,519.30) no pagan ISR. Al resto se le aplica la tasa que resulta del art. 174 del Reglamento del ISR, que es como lo hace NOI. El aguinaldo no lleva descuento de IMSS.</li>
     <li><b>PTU de nómina: 30 días libres.</b> Primero se fija lo que debes recibir (salario diario × 30) y luego se calcula cuánto tiene que pagar la empresa en bruto para que, quitando el ISR, te quede exactamente esa cantidad. Los primeros 15 UMA ($1,759.65) no pagan ISR, y la PTU no lleva IMSS.</li>
     <li><b>Lo de por fuera.</b> No tiene descuentos: lo semanal entre 7 es el salario diario; × 15 es el aguinaldo y × 30 la PTU.</li>
+    <li><b>Si no trabajaste el año completo.</b> Con tu fecha de ingreso se cuentan los días trabajados en 2026, de esa fecha al 31 de diciembre. El aguinaldo y la PTU se pagan en proporción: días de prestación × días trabajados ÷ 365. Ejemplo: si entraste el 1 de julio llevas 184 días, así que te tocan 15 × 184 ÷ 365 = 7.56 días de aguinaldo. Lo de por fuera usa su propia fecha si es distinta; si la dejas vacía, usa la de nómina. Si entraste antes de 2026 o dejas la fecha vacía, cuenta el año completo.</li>
     <li><b>Semanas de descanso adelantadas.</b> El descanso de 14 días son 2 semanas que te pagan por adelantado antes de salir. Cada semana vale lo de nómina más lo de por fuera. No hay prima vacacional porque no son vacaciones. Tus semanas normales de diciembre no se suman aquí.</li>
     <li><b>Si tienes otro trabajo.</b> Cada patrón te exenta 30 UMA del aguinaldo, pero en la declaración anual solo te toca una exención y un subsidio, así que podría salirte algo de ISR a pagar en abril. Este total es lo que te cae en diciembre, no el impuesto final.</li>
   </ol>
@@ -543,20 +548,32 @@ var CALC = (function () {
     return out;
   }
 
+  // Días trabajados en el año: de la fecha de ingreso (o 1-ene) al 31-dic, inclusive. null = sin fecha.
+  function diasTrab(ing, year) {
+    if (!ing) return null;
+    var ini = Date.UTC(year, 0, 1), fin = Date.UTC(year, 11, 31), d = Date.parse(ing + 'T00:00:00Z');
+    if (isNaN(d)) return null;
+    if (d > fin) return 0;
+    return Math.round((fin - Math.max(d, ini)) / 864e5) + 1;
+  }
+
   function calcular(st) {
     var par = st.par, uc = st.uc, ro = st.ro, fu = st.fuera;
     var R = { subM: subMensual(par) };
     R.semUC = sueldo(uc, 7, par);
+    R.diasUC = diasTrab(uc.ingreso, st.year); if (R.diasUC === null) R.diasUC = Math.min(365, +uc.laborados || 365);
+    R.diasFU = diasTrab(fu.ingreso, st.year); if (R.diasFU === null) R.diasFU = R.diasUC;
+    R.propUC = Math.min(R.diasUC, 365) / 365; R.propFU = Math.min(R.diasFU, 365) / 365;
     R.qnaRO = ro ? sueldo(ro, 15, par) : null;
     if (R.semUC) {
-      R.aguiUC = aguinaldo(R.semUC.SD, uc.aguiDias, uc.laborados, uc.regimen, par);
+      R.aguiUC = aguinaldo(R.semUC.SD, uc.aguiDias, R.diasUC, uc.regimen, par);
       var basePTU = uc.ptuBase === 'neto' ? r2(uc.neto / 7) : R.semUC.SD;
-      R.ptuUC = ptuNeta(r2(basePTU * uc.ptuDias), R.semUC.SD, uc.regimen, +uc.ptuExtra || 0, par);
+      R.ptuUC = ptuNeta(r2(basePTU * uc.ptuDias * R.propUC), R.semUC.SD, uc.regimen, +uc.ptuExtra || 0, par);
       R.ptuUC.basePTU = basePTU;
     }
     R.sdFuera = r2((+fu.neto || 0) / 7);
-    R.aguiFuera = r2(R.sdFuera * fu.aguiDias);
-    R.ptuFuera = r2(R.sdFuera * fu.ptuDias);
+    R.aguiFuera = r2(R.sdFuera * fu.aguiDias * R.propFU);
+    R.ptuFuera = r2(R.sdFuera * fu.ptuDias * R.propFU);
     if (R.qnaRO) R.aguiRO = aguinaldo(R.qnaRO.SD, ro.aguiDias, ro.laborados, ro.regimen, par);
     R.pagos = pagos(st.year, st.payDow, st.ranges);
     R.nOrd = Math.max(0, R.pagos.ordinarios.length + (+st.adjOrd || 0));
@@ -572,10 +589,10 @@ var CALC = (function () {
     R.lineas = [
       { k: 'adel', g: 'Unión de Crédito', t: 'Semanas de descanso adelantadas', e: R.nAdel + ' semanas que te pagan antes de irte, nómina + por fuera', det: det(R.nAdel), v: r2(R.semanal * R.nAdel) },
       { k: 'extra', g: 'Unión de Crédito', t: 'Semanas extra', e: '', det: det(R.nExtra), v: r2(R.semanal * R.nExtra) },
-      { k: 'ucAgui', g: 'Unión de Crédito', t: 'Aguinaldo de nómina', e: '15 días de sueldo bruto, menos su ISR', v: R.aguiUC ? R.aguiUC.neto : 0 },
-      { k: 'ucPtu', g: 'Unión de Crédito', t: 'PTU de nómina', e: '30 días libres: la empresa absorbe el ISR', v: R.ptuUC ? R.ptuUC.neto : 0 },
-      { k: 'fAgui', g: 'Por fuera', t: 'Aguinaldo por fuera', e: '15 días de lo que te dan por fuera, sin descuentos', v: R.aguiFuera },
-      { k: 'fPtu', g: 'Por fuera', t: 'PTU por fuera', e: '30 días de lo que te dan por fuera, sin descuentos', v: R.ptuFuera },
+      { k: 'ucAgui', g: 'Unión de Crédito', t: 'Aguinaldo de nómina', e: R.diasUC < 365 ? uc.aguiDias + ' días proporcionales a ' + R.diasUC + ' días trabajados, menos su ISR' : uc.aguiDias + ' días de sueldo bruto, menos su ISR', v: R.aguiUC ? R.aguiUC.neto : 0 },
+      { k: 'ucPtu', g: 'Unión de Crédito', t: 'PTU de nómina', e: R.diasUC < 365 ? uc.ptuDias + ' días libres proporcionales a ' + R.diasUC + ' días trabajados' : uc.ptuDias + ' días libres: la empresa absorbe el ISR', v: R.ptuUC ? R.ptuUC.neto : 0 },
+      { k: 'fAgui', g: 'Por fuera', t: 'Aguinaldo por fuera', e: R.diasFU < 365 ? fu.aguiDias + ' días proporcionales a ' + R.diasFU + ' días, sin descuentos' : fu.aguiDias + ' días de lo que te dan por fuera, sin descuentos', v: R.aguiFuera },
+      { k: 'fPtu', g: 'Por fuera', t: 'PTU por fuera', e: R.diasFU < 365 ? fu.ptuDias + ' días proporcionales a ' + R.diasFU + ' días, sin descuentos' : fu.ptuDias + ' días de lo que te dan por fuera, sin descuentos', v: R.ptuFuera },
       { k: 'roAgui', g: 'Otro trabajo', t: 'Aguinaldo Otro trabajo', e: '15 días de sueldo bruto, menos su ISR', v: R.aguiRO ? R.aguiRO.neto : 0 },
       { k: 'roQna', g: 'Otro trabajo', t: 'Quincenas de diciembre', e: R.nQna + ' × ' + R.qnaNeto.toFixed(2) + (R.qnaEst ? ' (neto estimado con tu bruto)' : ' neto'), v: r2(R.qnaNeto * R.nQna) }
     ];
@@ -585,7 +602,7 @@ var CALC = (function () {
   }
 
   return { r2: r2, T7: T7, T15: T15, TM: TM, isrRaw: isrRaw, periodo: periodo, brutoDesdeNeto: brutoDesdeNeto, sueldo: sueldo, sdDe: sdDe,
-    isrGrat: isrGrat, aguinaldo: aguinaldo, ptuNeta: ptuNeta, pagos: pagos, calcular: calcular, subMensual: subMensual };
+    isrGrat: isrGrat, aguinaldo: aguinaldo, ptuNeta: ptuNeta, pagos: pagos, diasTrab: diasTrab, calcular: calcular, subMensual: subMensual };
 })();
 
 
@@ -594,8 +611,8 @@ var CALC = (function () {
 {
 const C = CALC;
 const DEF = {year:2026,payDow:5,ranges:[{a:'2026-12-22',b:'2027-01-04'}],adjOrd:0,adjAdel:0,extraSem:0,
-  uc:{neto:0,isr:0,imss:0,regimen:'02',aguiDias:15,laborados:365,otras:0,ptuDias:30,ptuBase:'bruto',ptuExtra:0},
-  fuera:{neto:0,aguiDias:15,ptuDias:30},
+  uc:{ingreso:'',neto:0,isr:0,imss:0,regimen:'02',aguiDias:15,laborados:365,otras:0,ptuDias:30,ptuBase:'bruto',ptuExtra:0},
+  fuera:{ingreso:'',neto:0,aguiDias:15,ptuDias:30},
   par:{uma:117.31,umaM:3566.22,subPct:15.02,subLim:11492.66,metodo:'174',sdQna:'mes',factor:1.0493,imssExc:0.40,imssPd:0.25,imssGmp:0.375,imssIv:0.625,imssCv:1.125},
   incl:{adel:true,extra:true,ucAgui:true,ucPtu:true,fAgui:true,fPtu:true,roAgui:true}};
 const KEY = 'union-dic2026-v2';
@@ -663,6 +680,10 @@ function sueldoRows(s, quien) {
   }
   return rows;
 }
+function diasRow(que, dias, trab) {
+  if (trab >= 365) return ['× días de ' + que, String(dias)];
+  return ['× días de ' + que + '<small>' + dias + ' × ' + trab + ' días trabajados ÷ 365</small>', (dias * trab / 365).toFixed(4)];
+}
 function gratRows(g, tope) {
   const r = [['Exento: ' + tope + ' UMA', '− ' + m(g.exento)], ['Parte que paga ISR', m(g.gravado), 'sum']];
   if (g.gravado > 0) {
@@ -699,6 +720,9 @@ function render() {
   const s = R.semUC, f = R.qnaRO;
   $('#miniUC').innerHTML = s ? '<span>Bruto semanal ' + m(s.bruto) + '</span><span>Diario ' + m(s.SD) + '</span>' : '<span>Sin dato</span>';
   $('#miniEX').innerHTML = '<span>Cada semana extra</span><span>' + m(R.semanal) + '</span>';
+  const dLbl = d => d >= 365 ? 'año completo' : d + ' de 365 días (' + (d / 365 * 100).toFixed(2) + ' %)';
+  $('#miniDiasUC').innerHTML = '<span>' + (st.uc.ingreso ? 'Desde ' + new Date(st.uc.ingreso + 'T12:00:00Z').toLocaleDateString('es-MX', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}) : 'Trabajados en ' + st.year) + '</span><span>' + (st.uc.ingreso && R.diasUC === 0 ? 'fecha después de ' + st.year : dLbl(R.diasUC)) + '</span>';
+  $('#miniDiasFU').innerHTML = '<span>' + (st.fuera.ingreso ? 'Por fuera desde ' + new Date(st.fuera.ingreso + 'T12:00:00Z').toLocaleDateString('es-MX', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}) : 'Por fuera en ' + st.year) + '</span><span>' + dLbl(R.diasFU) + (st.fuera.ingreso ? '' : ' · misma fecha') + '</span>';
   $('#miniFU').innerHTML = '<span>Diario por fuera</span><span>' + m(R.sdFuera) + '</span>';
 
   // Calendario
@@ -724,9 +748,9 @@ function render() {
   // Tickets
   let h = '';
   h += tk('Unión: tu sueldo semanal', s && s.modo === 'recibo' ? 'Con tu recibo se reconstruye el sueldo bruto, que es la base del aguinaldo y la PTU.' : 'Sin retenciones capturadas, el bruto se estima con la tarifa 2026.', sueldoRows(s, 'semanal'));
-  if (R.aguiUC) { const a = R.aguiUC; h += tk('Unión: aguinaldo de nómina', 'Lo que marca la ley: 15 días de salario, con su ISR.', [['Salario diario bruto', m(a.SD)], ['× días de aguinaldo' + (a.laborados < 365 ? '<small>proporcional a ' + a.laborados + ' días trabajados</small>' : ''), String(a.dias)], ['= Aguinaldo bruto', m(a.bruto), 'sum']].concat(gratRows(a, 30)).concat([['Aguinaldo que recibes', m(a.neto), 'sum']])); }
-  if (R.ptuUC) { const p = R.ptuUC; h += tk('Unión: PTU de 30 días libres', 'Primero se fija lo que debes recibir y luego se calcula el bruto que cubre el ISR.', [['Salario diario ' + st.uc.ptuBase, m(p.basePTU)], ['× días de PTU', String(st.uc.ptuDias)], ['= Lo que debes recibir', m(p.objetivo), 'sum'], ['PTU bruta que paga la empresa', m(p.bruto)]].concat(gratRows(p, 15)).concat([p.extra ? ['Otra retención absorbida', m(p.extra)] : null, ['PTU que recibes', m(p.neto), 'sum'], ['Contra lo que debes recibir', chk(p.difNeto)]])); }
-  h += tk('Por fuera: aguinaldo y PTU', 'Sin descuentos de ningún tipo.', [['Te dan por semana', m(st.fuera.neto)], ['÷ 7 = salario diario', m(R.sdFuera), 'sum'], ['Aguinaldo<small>' + st.fuera.aguiDias + ' días × ' + m(R.sdFuera) + '</small>', m(R.aguiFuera)], ['PTU<small>' + st.fuera.ptuDias + ' días × ' + m(R.sdFuera) + '</small>', m(R.ptuFuera)], ['Total por fuera', m(R.aguiFuera + R.ptuFuera), 'sum']]);
+  if (R.aguiUC) { const a = R.aguiUC; h += tk('Unión: aguinaldo de nómina', 'Lo que marca la ley: 15 días de salario, con su ISR.', [['Salario diario bruto', m(a.SD)], diasRow('aguinaldo', a.dias, R.diasUC), ['= Aguinaldo bruto', m(a.bruto), 'sum']].concat(gratRows(a, 30)).concat([['Aguinaldo que recibes', m(a.neto), 'sum']])); }
+  if (R.ptuUC) { const p = R.ptuUC; h += tk('Unión: PTU de 30 días libres', 'Primero se fija lo que debes recibir y luego se calcula el bruto que cubre el ISR.', [['Salario diario ' + st.uc.ptuBase, m(p.basePTU)], diasRow('PTU', st.uc.ptuDias, R.diasUC), ['= Lo que debes recibir', m(p.objetivo), 'sum'], ['PTU bruta que paga la empresa', m(p.bruto)]].concat(gratRows(p, 15)).concat([p.extra ? ['Otra retención absorbida', m(p.extra)] : null, ['PTU que recibes', m(p.neto), 'sum'], ['Contra lo que debes recibir', chk(p.difNeto)]])); }
+  h += tk('Por fuera: aguinaldo y PTU', 'Sin descuentos de ningún tipo.', [['Te dan por semana', m(st.fuera.neto)], ['÷ 7 = salario diario', m(R.sdFuera), 'sum'], R.diasFU < 365 ? ['Días con lo de por fuera en ' + st.year, R.diasFU + ' de 365'] : null, ['Aguinaldo<small>' + st.fuera.aguiDias + ' días × ' + (R.diasFU < 365 ? R.diasFU + ' ÷ 365 × ' : '') + m(R.sdFuera) + '</small>', m(R.aguiFuera)], ['PTU<small>' + st.fuera.ptuDias + ' días × ' + (R.diasFU < 365 ? R.diasFU + ' ÷ 365 × ' : '') + m(R.sdFuera) + '</small>', m(R.ptuFuera)], ['Total por fuera', m(R.aguiFuera + R.ptuFuera), 'sum']]);
   h += tk('Unión: semanas de descanso adelantadas', 'Las semanas que te pagan antes de irte de descanso. Cada una incluye nómina y por fuera.', [['Semanas de descanso', String(R.nAdel)], ['Nómina<small>' + R.nAdel + ' × ' + m(st.uc.neto) + '</small>', m(R.lineas[0].det[0].v)], ['Por fuera<small>' + R.nAdel + ' × ' + m(st.fuera.neto) + '</small>', m(R.lineas[0].det[1].v)], ['Total adelantado', m(R.lineas[0].v), 'sum']]);
   if (R.nExtra || R.nQna) {
     const ex = R.lineas.find(l => l.k === 'extra'), q = R.lineas.find(l => l.k === 'roQna');
@@ -799,9 +823,9 @@ function tkItems(R) {
     adel: l => l.det.map(d => [d.t + ' ' + d.k + ' × ' + n(d.u), n(d.v)]),
     extra: l => l.det.map(d => [d.t + ' ' + d.k + ' × ' + n(d.u), n(d.v)]),
     ucAgui: () => R.aguiUC ? [['Bruto ' + n(R.aguiUC.bruto) + ' − ISR ' + n(R.aguiUC.isr), '']] : [],
-    ucPtu: () => R.ptuUC ? [[st.uc.ptuDias + ' días libres × ' + n(R.ptuUC.basePTU), ''], ['Bruto ' + n(R.ptuUC.bruto) + ' − ISR ' + n(R.ptuUC.isr), '']] : [],
-    fAgui: () => [[st.fuera.aguiDias + ' días × ' + n(R.sdFuera), '']],
-    fPtu: () => [[st.fuera.ptuDias + ' días × ' + n(R.sdFuera), '']],
+    ucPtu: () => R.ptuUC ? [[st.uc.ptuDias + ' días libres' + (R.diasUC < 365 ? ' × ' + R.diasUC + '/365' : '') + ' × ' + n(R.ptuUC.basePTU), ''], ['Bruto ' + n(R.ptuUC.bruto) + ' − ISR ' + n(R.ptuUC.isr), '']] : [],
+    fAgui: () => [[st.fuera.aguiDias + ' días' + (R.diasFU < 365 ? ' × ' + R.diasFU + '/365' : '') + ' × ' + n(R.sdFuera), '']],
+    fPtu: () => [[st.fuera.ptuDias + ' días' + (R.diasFU < 365 ? ' × ' + R.diasFU + '/365' : '') + ' × ' + n(R.sdFuera), '']],
     roAgui: () => R.aguiRO ? [['Bruto ' + n(R.aguiRO.bruto) + ' − ISR ' + n(R.aguiRO.isr), '']] : [],
     roQna: () => [[R.nQna + ' × ' + n(R.qnaNeto) + (R.qnaEst ? ' (estimado)' : ''), '']]
   };
@@ -818,6 +842,8 @@ function tkItems(R) {
   it.push({t:'l', a:'TOTAL', b:'$' + n(R.total), w:600, z:21});
   it.push({t:'dsep'});
   R.pagos.descansos.forEach(d => it.push({t:'l', a:'Descanso ' + fd(d.a) + ' – ' + fd(d.b) + ' · ' + d.semanas + ' semanas', b:'', w:400, z:11.5, c:'#6a7076'}));
+  if (R.diasUC < 365) it.push({t:'l', a:'Proporcional: ' + R.diasUC + ' días trabajados en ' + st.year + (R.diasFU !== R.diasUC ? ' (por fuera: ' + R.diasFU + ')' : ''), b:'', w:400, z:11.5, c:'#6a7076'});
+  else if (R.diasFU < 365) it.push({t:'l', a:'Por fuera proporcional: ' + R.diasFU + ' días en ' + st.year, b:'', w:400, z:11.5, c:'#6a7076'});
   it.push({t:'l', a:'Cifras netas en MXN con parámetros fiscales 2026. Estimación: mandan los recibos timbrados.', b:'', w:400, z:11.5, c:'#6a7076'});
   it.push({t:'sp', h:8});
   it.push({t:'bar'});
