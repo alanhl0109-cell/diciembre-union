@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Diciembre 2026 Unión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+/* VOICE herramienta personal de dinero, con aspecto de aparato físico bien hecho
+   IDEA una sumadora de escritorio de aluminio: pantalla LCD con el total, interruptores por concepto y rollo de papel que imprime la suma
+   PICTURE la pantalla LCD grande con el total y el rollo de papel impreso debajo, al lado del teclado de captura
+   COLOUR aluminio cepillado, LCD verde grisáceo, papel crema, una tecla naranja de acento; de noche, grafito
+   TYPE Share Tech Mono para el LCD, IBM Plex Mono para lo impreso, Barlow para las serigrafías
+   LAYOUT laptop: LCD + papel | teclado de captura; debajo módulos de calendario, tickets y servicio. Teléfono: LCD, captura, papel */
+:root{color-scheme:light dark;
+--desk:light-dark(#cdc8bf,#111214);--deskink:light-dark(#22262b,#e3e5e8);
+--alu1:light-dark(#f0f0ee,#4b4f55);--alu2:light-dark(#c4c7ca,#2a2d31);
+--ink:light-dark(#252a30,#e6e8ea);--mute:light-dark(#575e66,#a9afb6);--emb:light-dark(rgba(255,255,255,.75),rgba(0,0,0,.6));
+--well:light-dark(#f8f7f3,#1a1c1f);--wellink:light-dark(#1d2126,#eef0f2);
+--key1:light-dark(#fafaf8,#5d6168);--key2:light-dark(#d9dad8,#40444a);--keye:light-dark(#a9abad,#202226);
+--or:#e0601b;--or2:#c24c10;--led:#ff8a3d;--grn:#53d36a;
+--lcd1:#b1bf9f;--lcd2:#97a787;--lcdink:#18210f;
+--paper:light-dark(#fcfaf3,#ebe8de);--pink:#22262a;--pmute:#646a70}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--desk);color:var(--deskink);font:16px/1.5 "Barlow",system-ui,sans-serif;overflow-x:clip}
+.desk{padding:clamp(20px,3.5vw,48px) max(4vw,12px) 40px}
+.wrap{max-width:1200px;margin:0 auto}
+h1{font-size:clamp(30px,4.4vw,46px);line-height:1.05;letter-spacing:-.02em;margin:0 0 6px;font-weight:700;text-wrap:balance}
+.lead{margin:0 0 22px;max-width:68ch;color:var(--deskink);opacity:.85}
+.mod{position:relative;border-radius:18px;padding:clamp(20px,3vw,34px);margin-bottom:22px;color:var(--ink);
+background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 2px,rgba(0,0,0,.025) 2px 3px),linear-gradient(180deg,var(--alu1),var(--alu2));
+box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.18),0 2px 3px rgba(0,0,0,.25),0 22px 36px -18px rgba(0,0,0,.55)}
+.scr{position:absolute;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#9ea3a8 60%,#6b7076);box-shadow:inset 0 -1px 1px rgba(0,0,0,.4),0 1px 0 var(--emb)}
+.scr::after{content:"";position:absolute;left:2px;right:2px;top:5.5px;height:2px;background:#4b5056;border-radius:1px;transform:rotate(var(--r,35deg))}
+.plate{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;margin:0 6px 20px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,.18);box-shadow:0 1px 0 var(--emb)}
+.plate h2{font-size:22px;margin:0;font-weight:700;letter-spacing:-.01em;text-shadow:0 1px 0 var(--emb)}
+.plate p{margin:0;color:var(--mute);font-size:15px;text-shadow:0 1px 0 var(--emb)}
+.pwr{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mute)}
+.led{display:inline-block;width:10px;height:10px;border-radius:50%;background:#5a3a2a;box-shadow:inset 0 1px 2px rgba(0,0,0,.6);flex:none}
+.led.on,input:checked+.led{background:radial-gradient(circle at 40% 35%,#ffd2b0,var(--led) 55%,#c4500f);box-shadow:0 0 8px var(--led),0 0 2px var(--led)}
+.led.g{background:radial-gradient(circle at 40% 35%,#d8ffdf,var(--grn) 55%,#2c8a3c);box-shadow:0 0 8px var(--grn)}
+.top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"lcd ctrl" "tape ctrl";gap:22px 30px;align-items:start}
+.a-lcd{grid-area:lcd}.a-ctrl{grid-area:ctrl}.a-tape{grid-area:tape}
+.bezel{background:linear-gradient(180deg,#2c2f33,#1c1e21);border-radius:12px;padding:14px;box-shadow:inset 0 2px 3px rgba(0,0,0,.6),0 1px 0 var(--emb)}
+.lcd{position:relative;border-radius:5px;padding:12px 16px 12px;background:linear-gradient(170deg,var(--lcd1),var(--lcd2));color:var(--lcdink);box-shadow:inset 0 3px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(0,0,0,.25);font-family:"Share Tech Mono",ui-monospace,monospace}
+.ann{display:flex;gap:16px;font-size:14px;opacity:.85}
+.ann span:last-child{margin-left:auto}
+.dig{position:relative;text-align:right;font-size:clamp(36px,7.4vw,70px);line-height:1.1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dig .gh{position:absolute;right:0;top:0;opacity:.09}
+.dig small{font-size:.45em;margin-right:6px;vertical-align:.35em}
+.lsub{font-size:15px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(24,33,15,.25);padding-top:6px;margin-top:4px}
+.find{margin:14px 4px 0;font-size:17px;line-height:1.45;text-shadow:0 1px 0 var(--emb)}
+.find b{font-weight:700}
+.grp{border-radius:12px;padding:16px;margin-bottom:14px;background:rgba(0,0,0,.035);box-shadow:inset 0 1px 3px rgba(0,0,0,.18),0 1px 0 var(--emb)}
+.grp h3{margin:0 0 2px;font-size:17px;font-weight:700;text-shadow:0 1px 0 var(--emb)}
+.grp>p{margin:0 0 10px;font-size:14px;color:var(--mute)}
+.f{display:grid;gap:3px;margin-bottom:10px}
+.f>span{font-size:14px;color:var(--mute);text-shadow:0 1px 0 var(--emb)}
+.r2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
+.r3{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0 12px}
+input,select,button{font:inherit;font-size:16px}
+.well{display:flex;align-items:center;height:44px;border-radius:7px;background:var(--well);color:var(--wellink);box-shadow:inset 0 2px 4px rgba(0,0,0,.28),0 1px 0 var(--emb);padding:0 10px}
+.well b{font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--mute);margin-right:4px}
+.well input,.well select{flex:1;width:100%;height:100%;border:0;background:transparent;color:inherit;font-family:"IBM Plex Mono",monospace;font-size:16px;text-align:right;outline:none}
+.well select{text-align:left;font-family:"Barlow",sans-serif;cursor:pointer}
+.well:focus-within{box-shadow:inset 0 2px 4px rgba(0,0,0,.28),0 0 0 2px var(--or)}
+.mini{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:"Share Tech Mono",monospace;font-size:15px;color:var(--lcdink);background:linear-gradient(170deg,var(--lcd1),var(--lcd2));border-radius:5px;padding:6px 10px;box-shadow:inset 0 2px 5px rgba(0,0,0,.4),0 1px 0 var(--emb)}
+.key{height:44px;padding:0 16px;border-radius:8px;border:1px solid rgba(0,0,0,.28);cursor:pointer;color:var(--ink);background:linear-gradient(180deg,var(--key1),var(--key2));box-shadow:0 3px 0 var(--keye),0 5px 8px -2px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .06s,box-shadow .06s}
+.key:active{transform:translateY(2px);box-shadow:0 1px 0 var(--keye),0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.5)}
+.key.or{background:linear-gradient(180deg,#f07a35,var(--or));color:#fff;border-color:var(--or2);box-shadow:0 3px 0 var(--or2),0 5px 8px -2px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35)}
+.key:focus-visible,.d:focus-visible,.sw:focus-visible{outline:2px solid var(--or);outline-offset:2px}
+.keys{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.msg{font-size:14px;color:var(--mute);min-height:20px;margin:8px 0 0}
+.bank{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin-bottom:14px}
+.tg{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:rgba(0,0,0,.04);box-shadow:inset 0 1px 2px rgba(0,0,0,.16),0 1px 0 var(--emb);font-size:14px;line-height:1.2;cursor:pointer;min-height:48px}
+.sw{appearance:none;-webkit-appearance:none;flex:none;width:40px;height:22px;margin:0;border-radius:11px;cursor:pointer;position:relative;background:linear-gradient(180deg,#3a3d42,#55595f);box-shadow:inset 0 2px 3px rgba(0,0,0,.6),0 1px 0 var(--emb)}
+.sw::before{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:linear-gradient(180deg,#fdfdfc,#c9cbcd);box-shadow:0 1px 2px rgba(0,0,0,.5);transition:left .12s}
+.sw:checked{background:linear-gradient(180deg,var(--or2),var(--or))}
+.sw:checked::before{left:20px}
+.slot{height:10px;border-radius:5px;background:#1d1f22;box-shadow:inset 0 2px 3px rgba(0,0,0,.8),0 1px 0 var(--emb);margin:0 8px}
+.tape{margin:-5px 22px 0;background:var(--paper);color:var(--pink);font-family:"IBM Plex Mono",monospace;font-size:14px;padding:18px 18px 26px;box-shadow:0 6px 14px -6px rgba(0,0,0,.45),inset 0 8px 8px -6px rgba(0,0,0,.25);
+-webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - 8px) no-repeat,conic-gradient(from 135deg at top,#000 90deg,#0000 0) bottom/14px 8px repeat-x;mask:linear-gradient(#000,#000) top/100% calc(100% - 8px) no-repeat,conic-gradient(from 135deg at top,#000 90deg,#0000 0) bottom/14px 8px repeat-x}
+.tl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:6px 0;border-bottom:1px dashed rgba(34,38,42,.25)}
+.tl .v{white-space:nowrap;text-align:right;font-weight:500}
+.tl small{grid-column:1/-1;color:var(--pmute);font-size:13px;font-family:"Barlow",sans-serif}
+.th{display:flex;justify-content:space-between;color:var(--pmute);padding-bottom:6px;border-bottom:1px solid var(--pink)}
+.tg2{font-weight:600;margin-top:10px;display:flex;justify-content:space-between}
+.tt{display:flex;justify-content:space-between;font-weight:600;font-size:17px;border-top:2px solid var(--pink);margin-top:10px;padding-top:8px}
+.cal{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:26px}
+.months{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.mo h3{font-size:16px;margin:0 0 8px;text-shadow:0 1px 0 var(--emb)}
+.g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.dw{font-size:13px;color:var(--mute);text-align:center}
+.d{position:relative;height:40px;padding:0;border-radius:6px;font-size:14px;font-family:"IBM Plex Mono",monospace;color:var(--ink);cursor:pointer;border:1px solid rgba(0,0,0,.22);background:linear-gradient(180deg,var(--key1),var(--key2));box-shadow:0 2px 0 var(--keye),0 3px 4px -1px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.55)}
+.d.out{visibility:hidden}
+.d.vac{transform:translateY(2px);background:linear-gradient(180deg,#f07a35,var(--or));color:#fff;border-color:var(--or2);box-shadow:0 0 0 var(--or2),inset 0 2px 3px rgba(0,0,0,.3)}
+.d.sel{outline:2px solid var(--or);outline-offset:1px}
+.d.pay::after{content:"";position:absolute;left:50%;bottom:4px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:currentColor;opacity:.75}
+.leg{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--mute);margin-top:14px}
+.leg i{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+.rd{background:linear-gradient(170deg,var(--lcd1),var(--lcd2));color:var(--lcdink);font-family:"Share Tech Mono",monospace;border-radius:6px;padding:10px 12px;box-shadow:inset 0 2px 6px rgba(0,0,0,.45),0 1px 0 var(--emb);margin-bottom:10px}
+.rd .big{font-size:26px;line-height:1.15}
+.rdx{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rdx .key{height:36px;padding:0 12px;font-size:14px}
+.help{font-size:15px;margin:0 0 12px;text-shadow:0 1px 0 var(--emb)}
+.tks{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:22px;align-items:start}
+.tk{background:var(--paper);color:var(--pink);padding:16px 16px 22px;box-shadow:0 8px 16px -8px rgba(0,0,0,.5);
+-webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - 8px) no-repeat,conic-gradient(from 135deg at top,#000 90deg,#0000 0) bottom/14px 8px repeat-x;mask:linear-gradient(#000,#000) top/100% calc(100% - 8px) no-repeat,conic-gradient(from 135deg at top,#000 90deg,#0000 0) bottom/14px 8px repeat-x}
+.tk h3{margin:0 0 2px;font-size:17px;font-weight:700}
+.tk>p{margin:0 0 10px;font-size:14px;color:var(--pmute);line-height:1.4}
+.tk table{width:100%;border-collapse:collapse;font-family:"IBM Plex Mono",monospace;font-size:13.5px}
+.tk td{padding:4px 0;vertical-align:top;border-bottom:1px dotted rgba(34,38,42,.22)}
+.tk td:last-child{text-align:right;white-space:nowrap;padding-left:10px}
+.tk td small{display:block;color:var(--pmute);font-size:12.5px;font-family:"Barlow",sans-serif}
+.tk tr.ind td{padding-left:12px;color:var(--pmute);font-size:13px}
+.tk tr.ind td:last-child{padding-left:10px}
+.tk tr.sum td{font-weight:600;border-top:1.5px solid var(--pink);border-bottom:0;padding-top:7px}
+.tk tr.hd td{padding-top:10px;font-family:"Barlow",sans-serif;font-weight:600;font-size:14px;border-bottom:1px solid var(--pink)}
+.ok{color:#1f7a3b}.wn{color:#9a5200}
+details.svc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;text-shadow:0 1px 0 var(--emb);min-height:44px}
+details.svc summary::-webkit-details-marker{display:none}
+details.svc summary::before{content:"";width:22px;height:22px;border-radius:50%;flex:none;background:radial-gradient(circle at 40% 35%,#fff,#a4a9ae 60%,#6b7076);box-shadow:0 1px 2px rgba(0,0,0,.4);transition:transform .2s}
+details.svc[open] summary::before{transform:rotate(90deg)}
+details.svc summary span{font-weight:400;font-size:15px;color:var(--mute)}
+.svcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin-top:16px}
+.tar{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:14px}
+.scroll{overflow-x:auto}
+.tar table{width:100%;border-collapse:collapse;font-family:"IBM Plex Mono",monospace;font-size:13px}
+.tar caption{text-align:left;font-family:"Barlow",sans-serif;font-weight:700;padding-bottom:4px}
+.tar td{padding:3px 4px;border-bottom:1px solid rgba(0,0,0,.12);text-align:right;white-space:nowrap}
+.man{background:var(--paper);color:var(--pink);border-radius:4px;padding:clamp(22px,4vw,44px);box-shadow:0 10px 24px -12px rgba(0,0,0,.55),0 1px 0 rgba(0,0,0,.08);margin-top:6px}
+.man h2{font-size:28px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+.man>p{color:var(--pmute);margin:0 0 18px;max-width:70ch}
+.man ol{margin:0;padding-left:24px;columns:2 340px;column-gap:40px}
+.man li{margin-bottom:14px;break-inside:avoid;max-width:68ch}
+.man b{font-weight:700}
+.foot{font-size:14px;margin-top:24px;opacity:.85;max-width:90ch}
+.foot a{color:inherit}
+.prn{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+.pbox{max-width:420px;width:100%;margin:0 auto}
+.pbody{position:relative;border-radius:14px 14px 8px 8px;padding:16px 18px 22px;background:linear-gradient(180deg,#3b3e43,#24262a);color:#d9dcdf;box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 6px 12px -4px rgba(0,0,0,.5)}
+.pbody .row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pbody .st{display:flex;align-items:center;gap:8px;font-size:14px;color:#b9bec3}
+.pbody .led.g{transition:none}
+.printing .pbody .led{animation:blink .35s steps(2) infinite}
+.printing .pbody{animation:hum .09s steps(2) infinite}
+@keyframes blink{50%{background:#5a3a2a;box-shadow:none}}
+@keyframes hum{50%{transform:translateX(.6px)}}
+.mouth{position:relative;height:14px;margin:-8px 10px 0;border-radius:0 0 7px 7px;background:#0d0e10;box-shadow:inset 0 3px 4px rgba(0,0,0,.9)}
+.feed{position:relative;height:0;overflow:hidden;width:calc(100% - 44px);max-width:360px;margin:-6px auto 0}
+.feed img{position:absolute;left:0;bottom:0;width:100%;height:auto;display:block}
+.feed.on img{filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.feed.on{overflow:visible}
+.feed.on{height:var(--h)}
+.printing .feed{animation:feed 2.8s steps(30) forwards}
+@keyframes feed{from{height:0}to{height:var(--h)}}
+.how ol{margin:0;padding-left:22px}
+.how li{margin-bottom:10px;max-width:52ch;text-shadow:0 1px 0 var(--emb)}
+@media(max-width:900px){.prn{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.printing .feed{animation:none;height:var(--h)}.printing .pbody,.printing .pbody .led{animation:none}}
+@media(max-width:900px){.top{grid-template-columns:minmax(0,1fr);grid-template-areas:"lcd" "ctrl" "tape"}.cal{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.months{grid-template-columns:minmax(0,1fr)}.tape{margin:-5px 8px 0;padding:16px 12px 24px}.r2{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.key,.sw::before,details.svc summary::before{transition:none}}
+</style>
+</head>
+<body>
+<div class="desk">
+<header class="wrap">
+  <h1>Diciembre 2026: cuánto voy a recibir</h1>
+  <p class="lead">Para el personal de la Unión de Crédito: suma las 2 semanas de descanso que te adelantan, tu aguinaldo y tu PTU de nómina y lo que te dan por fuera. Captura los datos de tu recibo semanal y te dice cuánto recibes en diciembre.</p>
+</header>
+
+<section class="mod wrap" aria-label="Total y captura">
+  <div class="plate"><h2>Sumadora de fin de año</h2><span class="pwr"><span class="led g"></span>Parámetros fiscales 2026</span></div>
+  <div class="top">
+    <div class="a-lcd">
+      <div class="bezel"><div class="lcd">
+        <div class="ann"><span>NETO</span><span>MXN</span><span>DIC 2026</span></div>
+        <div class="dig"><span class="gh">888,888.88</span><small>$</small><span id="total">0.00</span></div>
+        <div class="lsub"><span id="lsub1"></span><span id="lsub2"></span></div>
+      </div></div>
+      <p class="find" id="find"></p>
+    </div>
+
+    <div class="a-ctrl">
+      <div class="grp">
+        <h3>Unión de Crédito: nómina semanal</h3>
+        <p>Con tus tres datos del recibo sale tu sueldo bruto exacto: neto + ISR + IMSS.</p>
+        <label class="f"><span>Lo que te depositan cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucNeto" data-k="uc.neto"></span></label>
+        <div class="r2">
+          <label class="f"><span>ISR que te retienen</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucIsr" data-k="uc.isr" data-blank="1" placeholder="0.00"></span></label>
+          <label class="f"><span>IMSS que te retienen</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="ucImss" data-k="uc.imss" data-blank="1" placeholder="0.00"></span></label>
+        </div>
+        <div class="mini" id="miniUC"></div>
+      </div>
+      <div class="grp">
+        <h3>Unión de Crédito: lo que te dan por fuera</h3>
+        <p>No lleva descuentos, así que lo que capturas es lo que recibes.</p>
+        <label class="f"><span>Lo que te dan por fuera cada semana</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" inputmode="decimal" id="fuNeto" data-k="fuera.neto"></span></label>
+        <div class="mini" id="miniFU"></div>
+      </div>
+      <div class="grp">
+        <h3>Pagos extra en diciembre</h3>
+        <p>Por si en diciembre te pagan alguna semana normal además de lo anterior.</p>
+        <div>
+          <label class="f"><span>Semanas extra de la Unión</span><span class="well"><select id="extraSem" data-k="extraSem" data-num="1"><option value="0">Ninguna</option><option value="1">1 semana</option><option value="2">2 semanas</option><option value="3">3 semanas</option><option value="4">4 semanas</option></select></span></label>
+        </div>
+        <div class="mini" id="miniEX"></div>
+      </div>
+      <div class="keys"><button type="button" class="key or" id="goPrint">Imprimir ticket</button><button type="button" class="key" id="copy">Copiar texto</button><button type="button" class="key" id="reset">Restablecer</button></div>
+      <p class="msg" id="msg" role="status">Vienen datos de ejemplo: cámbialos por los de tu recibo. Lo que captures se queda solo en tu navegador; nadie más lo ve.</p>
+    </div>
+
+    <div class="a-tape">
+      <div class="bank" id="bank"></div>
+      <div class="slot"></div>
+      <div class="tape" id="tape"></div>
+    </div>
+  </div>
+</section>
+
+<section class="mod wrap" id="ticket" aria-label="Ticket para compartir">
+  <div class="plate"><h2>Ticket para compartir</h2><p>Imprime el resumen y pégalo en WhatsApp como imagen.</p></div>
+  <div class="prn">
+    <div class="pbox" id="pbox">
+      <div class="pbody">
+        <div class="row">
+          <span class="st"><span class="led" id="pled"></span><span id="pst">Impresora lista</span></span>
+          <button type="button" class="key or" id="print">Imprimir ticket</button>
+        </div>
+      </div>
+      <div class="mouth"></div>
+      <div class="feed" id="feed"><img id="tkImg" alt="Ticket con el resumen de ingresos de diciembre"></div>
+      <div class="keys" id="tkActs" hidden style="justify-content:center;margin-top:16px">
+        <button type="button" class="key or" id="tkCopy">Copiar imagen</button>
+        <button type="button" class="key" id="tkSave" hidden>Guardar o compartir</button>
+      </div>
+      <p class="msg" id="tkMsg" role="status" style="text-align:center"></p>
+    </div>
+    <div class="how">
+      <h3 style="margin:0 0 10px;font-size:17px;text-shadow:0 1px 0 var(--emb)">Cómo mandarlo por WhatsApp</h3>
+      <ol>
+        <li><b>Imprime el ticket.</b> Sale con el total, cada concepto y su desglose, con los datos que tengas capturados en ese momento.</li>
+        <li><b>En la computadora:</b> toca "Copiar imagen" y en el chat de WhatsApp pega con Ctrl + V (⌘ + V en Mac).</li>
+        <li><b>En el celular:</b> toca "Guardar o compartir" y elige WhatsApp, o mantén presionado el ticket y elige copiar.</li>
+        <li>Si cambias algún dato, vuelve a imprimir para que el ticket se actualice.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="mod wrap" id="descanso" aria-label="Descanso">
+  <div class="plate"><h2>Descanso de fin de año en la Unión</h2><p>No son vacaciones: no lleva prima vacacional, solo te adelantan el pago de esas semanas.</p></div>
+  <div class="cal">
+    <div>
+      <p class="help">Toca el primer día y luego el último día del descanso. Las teclas naranjas son los días en que no trabajas; el punto marca tu día de pago.</p>
+      <div class="months" id="months"></div>
+      <div class="leg"><span><i style="background:var(--or)"></i>Descanso</span><span><i style="background:var(--key2);border:1px solid rgba(0,0,0,.25)"></i>Día normal</span><span>• Día de pago</span></div>
+    </div>
+    <div>
+      <div id="rangos"></div>
+      <div class="r2">
+        <label class="f"><span>Desde</span><span class="well"><input type="date" id="ra"></span></label>
+        <label class="f"><span>Hasta</span><span class="well"><input type="date" id="rb"></span></label>
+      </div>
+      <div class="keys"><button type="button" class="key" id="radd">Agregar descanso</button></div>
+      <div class="r2" style="margin-top:16px">
+        <label class="f"><span>Día de pago de la Unión</span><span class="well"><select id="payDow" data-k="payDow" data-num="1"><option value="1">Lunes</option><option value="2">Martes</option><option value="3">Miércoles</option><option value="4">Jueves</option><option value="5">Viernes</option><option value="6">Sábado</option><option value="0">Domingo</option></select></span></label>
+        <label class="f"><span>Corregir semanas (±)</span><span class="well"><input type="number" step="1" id="adjAdel" data-k="adjAdel"></span></label>
+      </div>
+      <div id="semRes"></div>
+    </div>
+  </div>
+</section>
+
+<section class="mod wrap" id="detalle" aria-label="Papel de trabajo">
+  <div class="plate"><h2>Tickets: de dónde sale cada cantidad</h2><p>Cada concepto del total, paso por paso.</p></div>
+  <div class="tks" id="tks"></div>
+</section>
+
+<section class="mod wrap" id="servicio" aria-label="Parámetros">
+  <details class="svc">
+    <summary>Panel de servicio <span>Parámetros 2026 y reglas de cada empresa</span></summary>
+    <div class="svcg">
+      <div class="grp">
+        <h3>Unión de Crédito</h3>
+        <div class="r2">
+          <label class="f"><span>Días de aguinaldo</span><span class="well"><input type="number" step="1" min="0" data-k="uc.aguiDias"></span></label>
+          <label class="f"><span>Días trabajados en 2026</span><span class="well"><input type="number" step="1" min="0" max="365" data-k="uc.laborados"></span></label>
+          <label class="f"><span>Días de PTU (libres)</span><span class="well"><input type="number" step="1" min="0" data-k="uc.ptuDias"></span></label>
+          <label class="f"><span>PTU sobre</span><span class="well"><select data-k="uc.ptuBase"><option value="bruto">Salario diario bruto</option><option value="neto">Salario diario neto</option></select></span></label>
+          <label class="f"><span>Otros descuentos semanales</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" data-k="uc.otras"></span></label>
+          <label class="f"><span>Otra retención en la PTU</span><span class="well"><b>$</b><input type="number" step="0.01" min="0" data-k="uc.ptuExtra"></span></label>
+        </div>
+      </div>
+      <div class="grp">
+        <h3>Por fuera</h3>
+        <div class="r2">
+          <label class="f"><span>Por fuera: días de aguinaldo</span><span class="well"><input type="number" step="1" min="0" data-k="fuera.aguiDias"></span></label>
+          <label class="f"><span>Por fuera: días de PTU</span><span class="well"><input type="number" step="1" min="0" data-k="fuera.ptuDias"></span></label>
+        </div>
+      </div>
+      <div class="grp">
+        <h3>Valores fiscales 2026</h3>
+        <div class="r2">
+          <label class="f"><span>UMA diaria</span><span class="well"><input type="number" step="0.01" data-k="par.uma"></span></label>
+          <label class="f"><span>UMA mensual</span><span class="well"><input type="number" step="0.01" data-k="par.umaM"></span></label>
+          <label class="f"><span>Subsidio (% UMA mensual)</span><span class="well"><input type="number" step="0.01" data-k="par.subPct"></span></label>
+          <label class="f"><span>Tope mensual del subsidio</span><span class="well"><input type="number" step="0.01" data-k="par.subLim"></span></label>
+          <label class="f"><span>ISR de aguinaldo y PTU</span><span class="well"><select data-k="par.metodo"><option value="174">Art. 174 RLISR</option><option value="96">Art. 96 LISR</option></select></span></label>
+          <label class="f"><span>Año</span><span class="well"><input type="number" step="1" data-k="year"></span></label>
+        </div>
+      </div>
+      <div class="grp">
+        <h3>IMSS (solo para estimar y comprobar)</h3>
+        <div class="r2">
+          <label class="f"><span>Factor de integración</span><span class="well"><input type="number" step="0.0001" data-k="par.factor"></span></label>
+          <label class="f"><span>Excedente 3 UMA %</span><span class="well"><input type="number" step="0.001" data-k="par.imssExc"></span></label>
+          <label class="f"><span>Prestaciones en dinero %</span><span class="well"><input type="number" step="0.001" data-k="par.imssPd"></span></label>
+          <label class="f"><span>Gastos médicos pens. %</span><span class="well"><input type="number" step="0.001" data-k="par.imssGmp"></span></label>
+          <label class="f"><span>Invalidez y vida %</span><span class="well"><input type="number" step="0.001" data-k="par.imssIv"></span></label>
+          <label class="f"><span>Cesantía y vejez %</span><span class="well"><input type="number" step="0.001" data-k="par.imssCv"></span></label>
+        </div>
+      </div>
+    </div>
+    <div class="tar" id="tarifas"></div>
+  </details>
+</section>
+
+<article class="man wrap" id="manual">
+  <h2>Manual: cómo se arma tu total</h2>
+  <p>En palabras simples, para que cualquiera lo entienda sin que se lo expliques.</p>
+  <ol>
+    <li><b>Primero se saca tu sueldo bruto.</b> Lo que te depositan más lo que te retienen es lo que de verdad ganas: <span id="mm1"></span> Con ese salario diario se calculan el aguinaldo y la PTU de nómina.</li>
+    <li><b>Se comprueba contra la ley.</b> <span id="mm2"></span> El IMSS estimado puede salir unos centavos distinto porque depende del factor de integración que use la empresa.</li>
+    <li><b>Aguinaldo de nómina: 15 días.</b> Salario diario × 15. Los primeros 30 UMA ($3,519.30) no pagan ISR. Al resto se le aplica la tasa que resulta del art. 174 del Reglamento del ISR, que es como lo hace NOI. El aguinaldo no lleva descuento de IMSS.</li>
+    <li><b>PTU de nómina: 30 días libres.</b> Primero se fija lo que debes recibir (salario diario × 30) y luego se calcula cuánto tiene que pagar la empresa en bruto para que, quitando el ISR, te quede exactamente esa cantidad. Los primeros 15 UMA ($1,759.65) no pagan ISR, y la PTU no lleva IMSS.</li>
+    <li><b>Lo de por fuera.</b> No tiene descuentos: lo semanal entre 7 es el salario diario; × 15 es el aguinaldo y × 30 la PTU.</li>
+    <li><b>Semanas de descanso adelantadas.</b> El descanso de 14 días son 2 semanas que te pagan por adelantado antes de salir. Cada semana vale lo de nómina más lo de por fuera. No hay prima vacacional porque no son vacaciones. Tus semanas normales de diciembre no se suman aquí.</li>
+    <li><b>Si tienes otro trabajo.</b> Cada patrón te exenta 30 UMA del aguinaldo, pero en la declaración anual solo te toca una exención y un subsidio, así que podría salirte algo de ISR a pagar en abril. Este total es lo que te cae en diciembre, no el impuesto final.</li>
+  </ol>
+</article>
+
+<p class="foot wrap">Fuentes: <a href="https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/anexos/Anexo-8-RMF-2026_DOF-28122025.pdf">Anexo 8 RMF 2026 (SAT)</a>; UMA 2026 $117.31 diaria y $3,566.22 mensual (INEGI, DOF 09-01-2026); subsidio para el empleo 15.02 % de la UMA mensual con tope de $11,492.66 (DOF 31-12-2025). Es una estimación de apoyo; mandan los recibos timbrados de cada empresa.</p>
+</div>
+
+<script>
+/* Motor de cálculo — Diciembre 2026: aguinaldo, PTU y semanas de descanso adelantadas.
+   Funciones puras; se incrusta tal cual en la página. */
+var CALC = (function () {
+  function r2(x) { var s = x < 0 ? -1 : 1; return s * Math.round(Math.abs(x) * 100 + 1e-6) / 100; }
+
+  // Anexo 8 RMF 2026 (DOF 28-12-2025): [límite inferior, cuota fija, % sobre excedente]
+  var T7 = [[0.01,0,1.92],[194.47,3.71,6.40],[1650.68,96.95,10.88],[2900.88,232.96,16.00],[3372.12,308.35,17.92],[4037.33,427.56,21.36],[8142.76,1304.45,23.52],[12834.09,2407.86,30.00],[24502.46,5908.35,32.00],[32669.92,8521.94,34.00],[98009.67,30737.49,35.00]];
+  var T15 = [[0.01,0,1.92],[416.71,7.95,6.40],[3537.16,207.75,10.88],[6216.16,499.20,16.00],[7225.96,660.75,17.92],[8651.41,916.20,21.36],[17448.76,2795.25,23.52],[27501.61,5159.70,30.00],[52505.26,12660.75,32.00],[70006.96,18261.30,34.00],[210020.71,65866.05,35.00]];
+  var TM = [[0.01,0,1.92],[844.60,16.22,6.40],[7168.52,420.95,10.88],[12598.03,1011.68,16.00],[14644.65,1339.14,17.92],[17533.65,1856.84,21.36],[35362.84,5665.16,23.52],[55736.69,10457.09,30.00],[106410.51,25659.23,32.00],[141880.67,37009.69,34.00],[425642.00,133488.54,35.00]];
+
+  function fila(base, T) { var f = T[0]; for (var i = 0; i < T.length; i++) if (base >= T[i][0]) f = T[i]; return f; }
+  function isrRaw(base, T) { if (base <= 0) return 0; var f = fila(base, T); return f[1] + (base - f[0]) * f[2] / 100; }
+  function subMensual(par) { return r2(par.subPct / 100 * par.umaM); }
+
+  // Recibo teórico de un periodo (7 o 15 días) a partir del salario diario
+  function periodo(SD, c, par) {
+    var d = c.dias, G = r2(SD * d), T = d === 7 ? T7 : T15;
+    var f = fila(G, T);
+    var isrT = r2(isrRaw(G, T));
+    var sub = 0;
+    if (c.regimen === '02' && G <= par.subLim / 30.4 * d + 1e-9) sub = r2(subMensual(par) / 30.4 * d);
+    var subAp = Math.min(sub, isrT);
+    var isrRet = r2(isrT - subAp);
+    var im = { sbc: 0, exc: 0, pd: 0, gmp: 0, iv: 0, cv: 0, total: 0 };
+    if (c.regimen === '02') {
+      im.sbc = r2(Math.min(SD * c.factor, par.uma * 25));
+      im.exc = r2(Math.max(im.sbc - 3 * par.uma, 0) * par.imssExc / 100 * d);
+      im.pd = r2(im.sbc * par.imssPd / 100 * d);
+      im.gmp = r2(im.sbc * par.imssGmp / 100 * d);
+      im.iv = r2(im.sbc * par.imssIv / 100 * d);
+      im.cv = r2(im.sbc * par.imssCv / 100 * d);
+      im.total = r2(im.exc + im.pd + im.gmp + im.iv + im.cv);
+    }
+    return { SD: SD, dias: d, bruto: G, li: f[0], cuota: f[1], pct: f[2], isrTarifa: isrT, subsidio: sub, subAplicado: subAp,
+      isrRet: isrRet, imss: im, otras: c.otras || 0, neto: r2(G - isrRet - im.total - (c.otras || 0)) };
+  }
+
+  // Neto → salario diario estimado con tarifa (cuando no se conocen las retenciones)
+  function brutoDesdeNeto(N, c, par) {
+    if (!(N > 0)) return null;
+    var d = c.dias, f = function (sd) { return periodo(sd, c, par).neto; };
+    var lo = N / d, hi = N / d * 2 + 100;
+    while (f(hi) < N) hi *= 1.5;
+    if (c.regimen === '02') {
+      var sdc = Math.floor(par.subLim / 30.4 * 100) / 100;
+      if (sdc > lo) { if (f(sdc) >= N) hi = Math.min(hi, sdc); else lo = Math.max(lo, sdc); }
+    }
+    for (var i = 0; i < 80; i++) { var m = (lo + hi) / 2; if (f(m) < N) lo = m; else hi = m; }
+    var base = Math.round(hi * 100), best = null;
+    for (var k = -8; k <= 8; k++) {
+      var sd = (base + k) / 100; if (sd <= 0) continue;
+      var dif = r2(f(sd) - N);
+      if (best === null || Math.abs(dif) < Math.abs(best.dif) - 1e-9 || (Math.abs(dif) === Math.abs(best.dif) && sd < best.sd)) best = { sd: sd, dif: dif };
+    }
+    var p = periodo(best.sd, c, par);
+    p.dif = best.dif;
+    return p;
+  }
+
+  // Salario diario: semanal ÷ 7; quincenal ÷ 15 o × 2 ÷ 30.4 (según parámetro)
+  function sdDe(bruto, dias, par) { return dias === 15 && par.sdQna === 'mes' ? r2(bruto * 2 / 30.4) : r2(bruto / dias); }
+
+  // Sueldo del periodo: bruto capturado, retenciones del recibo (exacto) o estimado con tarifa
+  function sueldo(cfg, dias, par) {
+    var c = { dias: dias, regimen: cfg.regimen || '02', factor: par.factor, otras: +cfg.otras || 0 };
+    var B = +cfg.bruto || 0;
+    if (B > 0) return { modo: 'bruto', bruto: r2(B), SD: sdDe(B, dias, par), dias: dias, modelo: periodo(B / dias, c, par) };
+    var N = +cfg.neto || 0; if (!(N > 0)) return null;
+    var isr = +cfg.isr || 0, imss = +cfg.imss || 0;
+    if (isr > 0 || imss > 0) {
+      var bruto = r2(N + isr + imss + c.otras);
+      return { modo: 'recibo', neto: N, isr: isr, imss: imss, otras: c.otras, bruto: bruto, SD: sdDe(bruto, dias, par), dias: dias,
+        modelo: periodo(bruto / dias, c, par) };
+    }
+    var p = brutoDesdeNeto(N, c, par);
+    return { modo: 'estimado', neto: N, isr: p.isrRet, imss: p.imss.total, otras: c.otras, bruto: p.bruto, SD: sdDe(p.bruto, dias, par), dias: dias,
+      dif: p.dif, modelo: p };
+  }
+
+  // ISR de aguinaldo / PTU (art. 174 RLISR o art. 96 LISR)
+  function isrGrat(monto, topeExento, ordMensual, par, regimen) {
+    var exento = regimen === '02' ? Math.min(monto, topeExento) : 0;
+    var grav = r2(monto - exento);
+    var o = { monto: monto, exento: r2(exento), gravado: grav, ordMensual: ordMensual, prop: 0, isrTot: 0, isrOrd: 0, dif: 0, tasa: 0, isr: 0 };
+    if (grav <= 0) return o;
+    if (par.metodo === '174') {
+      o.prop = grav / 365 * 30.4;
+      o.isrTot = isrRaw(ordMensual + o.prop, TM);
+      o.isrOrd = isrRaw(ordMensual, TM);
+      o.dif = o.isrTot - o.isrOrd;
+      o.tasa = o.dif / o.prop;
+      o.isr = r2(grav * o.tasa);
+    } else {
+      o.isrTot = isrRaw(ordMensual + grav, TM);
+      o.isrOrd = isrRaw(ordMensual, TM);
+      o.dif = o.isrTot - o.isrOrd;
+      o.isr = r2(o.dif);
+      o.tasa = o.isr / grav;
+    }
+    return o;
+  }
+
+  function aguinaldo(SD, dias, laborados, regimen, par) {
+    var bruto = r2(SD * dias * Math.min(laborados, 365) / 365);
+    var g = isrGrat(bruto, r2(30 * par.uma), r2(SD * 30.4), par, regimen);
+    g.SD = SD; g.dias = dias; g.laborados = laborados; g.bruto = bruto; g.neto = r2(bruto - g.isr);
+    return g;
+  }
+
+  // PTU con neto garantizado: bruto necesario para que, después de ISR, quede el objetivo
+  function ptuNeta(objetivo, SD, regimen, extra, par) {
+    var tope = r2(15 * par.uma), ord = r2(SD * 30.4);
+    var g = function (P) { return r2(P - isrGrat(P, tope, ord, par, regimen).isr - extra); };
+    var lo = objetivo, hi = objetivo * 2 + 1000;
+    while (g(hi) < objetivo) hi *= 1.5;
+    for (var i = 0; i < 80; i++) { var m = (lo + hi) / 2; if (g(m) < objetivo) lo = m; else hi = m; }
+    var base = Math.round(hi * 100), best = null;
+    for (var k = -8; k <= 8; k++) {
+      var P = (base + k) / 100, dif = r2(g(P) - objetivo);
+      if (best === null || Math.abs(dif) < Math.abs(best.dif) - 1e-9 || (Math.abs(dif) === Math.abs(best.dif) && P < best.P)) best = { P: P, dif: dif };
+    }
+    var o = isrGrat(best.P, tope, ord, par, regimen);
+    o.bruto = best.P; o.objetivo = objetivo; o.extra = extra; o.neto = r2(best.P - o.isr - extra); o.difNeto = best.dif;
+    return o;
+  }
+
+  // Calendario: pagos semanales normales de diciembre y semanas de descanso adelantadas
+  function iso(dt) { return dt.toISOString().slice(0, 10); }
+  function norm(r) { return r.a <= r.b ? { a: r.a, b: r.b } : { a: r.b, b: r.a }; }
+  function enRango(s, ranges) { for (var i = 0; i < ranges.length; i++) { var r = norm(ranges[i]); if (s >= r.a && s <= r.b) return true; } return false; }
+  function pagos(year, dow, ranges) {
+    var out = { ordinarios: [], descansos: [] }, todos = [];
+    for (var dt = new Date(Date.UTC(year, 11, 1)); dt <= new Date(Date.UTC(year + 1, 0, 31)); dt = new Date(dt.getTime() + 864e5))
+      if (dt.getUTCDay() === dow) todos.push(iso(dt));
+    todos.forEach(function (s) { if (s.slice(5, 7) === '12' && !enRango(s, ranges)) out.ordinarios.push(s); });
+    ranges.forEach(function (r0) {
+      var r = norm(r0), dias = Math.round((Date.parse(r.b) - Date.parse(r.a)) / 864e5) + 1, previo = null;
+      todos.forEach(function (s) { if (s < r.a) previo = s; });
+      out.descansos.push({ a: r.a, b: r.b, dias: dias, semanas: Math.round(dias / 7), previo: previo });
+    });
+    out.semanasAdel = out.descansos.reduce(function (s, d) { return s + d.semanas; }, 0);
+    return out;
+  }
+
+  function calcular(st) {
+    var par = st.par, uc = st.uc, ro = st.ro, fu = st.fuera;
+    var R = { subM: subMensual(par) };
+    R.semUC = sueldo(uc, 7, par);
+    R.qnaRO = ro ? sueldo(ro, 15, par) : null;
+    if (R.semUC) {
+      R.aguiUC = aguinaldo(R.semUC.SD, uc.aguiDias, uc.laborados, uc.regimen, par);
+      var basePTU = uc.ptuBase === 'neto' ? r2(uc.neto / 7) : R.semUC.SD;
+      R.ptuUC = ptuNeta(r2(basePTU * uc.ptuDias), R.semUC.SD, uc.regimen, +uc.ptuExtra || 0, par);
+      R.ptuUC.basePTU = basePTU;
+    }
+    R.sdFuera = r2((+fu.neto || 0) / 7);
+    R.aguiFuera = r2(R.sdFuera * fu.aguiDias);
+    R.ptuFuera = r2(R.sdFuera * fu.ptuDias);
+    if (R.qnaRO) R.aguiRO = aguinaldo(R.qnaRO.SD, ro.aguiDias, ro.laborados, ro.regimen, par);
+    R.pagos = pagos(st.year, st.payDow, st.ranges);
+    R.nOrd = Math.max(0, R.pagos.ordinarios.length + (+st.adjOrd || 0));
+    R.nAdel = Math.max(0, R.pagos.semanasAdel + (+st.adjAdel || 0));
+    R.semanal = r2((+uc.neto || 0) + (+fu.neto || 0));
+    R.nExtra = Math.max(0, +st.extraSem || 0);
+    R.nQna = ro ? Math.max(0, Math.min(2, +ro.quincenas || 0)) : 0;
+    R.qnaEst = !(ro && +ro.neto > 0);
+    R.qnaNeto = R.qnaEst ? (R.qnaRO ? R.qnaRO.modelo.neto : 0) : +ro.neto;
+    var det = function (k) { return [
+      { t: 'Nómina', k: k, u: +uc.neto || 0, v: r2((+uc.neto || 0) * k) },
+      { t: 'Por fuera', k: k, u: +fu.neto || 0, v: r2((+fu.neto || 0) * k) }]; };
+    R.lineas = [
+      { k: 'adel', g: 'Unión de Crédito', t: 'Semanas de descanso adelantadas', e: R.nAdel + ' semanas que te pagan antes de irte, nómina + por fuera', det: det(R.nAdel), v: r2(R.semanal * R.nAdel) },
+      { k: 'extra', g: 'Unión de Crédito', t: 'Semanas extra', e: '', det: det(R.nExtra), v: r2(R.semanal * R.nExtra) },
+      { k: 'ucAgui', g: 'Unión de Crédito', t: 'Aguinaldo de nómina', e: '15 días de sueldo bruto, menos su ISR', v: R.aguiUC ? R.aguiUC.neto : 0 },
+      { k: 'ucPtu', g: 'Unión de Crédito', t: 'PTU de nómina', e: '30 días libres: la empresa absorbe el ISR', v: R.ptuUC ? R.ptuUC.neto : 0 },
+      { k: 'fAgui', g: 'Por fuera', t: 'Aguinaldo por fuera', e: '15 días de lo que te dan por fuera, sin descuentos', v: R.aguiFuera },
+      { k: 'fPtu', g: 'Por fuera', t: 'PTU por fuera', e: '30 días de lo que te dan por fuera, sin descuentos', v: R.ptuFuera },
+      { k: 'roAgui', g: 'Otro trabajo', t: 'Aguinaldo Otro trabajo', e: '15 días de sueldo bruto, menos su ISR', v: R.aguiRO ? R.aguiRO.neto : 0 },
+      { k: 'roQna', g: 'Otro trabajo', t: 'Quincenas de diciembre', e: R.nQna + ' × ' + R.qnaNeto.toFixed(2) + (R.qnaEst ? ' (neto estimado con tu bruto)' : ' neto'), v: r2(R.qnaNeto * R.nQna) }
+    ];
+    if (!ro) R.lineas = R.lineas.filter(function (l) { return l.g !== 'Otro trabajo'; });
+    R.total = r2(R.lineas.reduce(function (s, l) { return s + (st.incl[l.k] ? l.v : 0); }, 0));
+    return R;
+  }
+
+  return { r2: r2, T7: T7, T15: T15, TM: TM, isrRaw: isrRaw, periodo: periodo, brutoDesdeNeto: brutoDesdeNeto, sueldo: sueldo, sdDe: sdDe,
+    isrGrat: isrGrat, aguinaldo: aguinaldo, ptuNeta: ptuNeta, pagos: pagos, calcular: calcular, subMensual: subMensual };
+})();
+
+
+</script>
+<script>
+{
+const C = CALC;
+const DEF = {year:2026,payDow:5,ranges:[{a:'2026-12-22',b:'2027-01-04'}],adjOrd:0,adjAdel:0,extraSem:0,
+  uc:{neto:2506.32,isr:222,imss:71.68,regimen:'02',aguiDias:15,laborados:365,otras:0,ptuDias:30,ptuBase:'bruto',ptuExtra:0},
+  fuera:{neto:1500,aguiDias:15,ptuDias:30},
+  par:{uma:117.31,umaM:3566.22,subPct:15.02,subLim:11492.66,metodo:'174',sdQna:'mes',factor:1.0493,imssExc:0.40,imssPd:0.25,imssGmp:0.375,imssIv:0.625,imssCv:1.125},
+  incl:{adel:true,extra:true,ucAgui:true,ucPtu:true,fAgui:true,fPtu:true,roAgui:true}};
+const KEY = 'union-dic2026-v1';
+const clone = o => JSON.parse(JSON.stringify(o));
+const merge = (a, b) => { for (const k in b) { if (!(k in a)) continue; if (b[k] && typeof b[k] === 'object' && !Array.isArray(b[k]) && a[k] && typeof a[k] === 'object') merge(a[k], b[k]); else a[k] = b[k]; } return a; };
+let st = clone(DEF);
+try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v) st = merge(clone(DEF), v); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+const $ = s => document.querySelector(s);
+const MX = new Intl.NumberFormat('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2});
+const n = v => MX.format(v || 0);
+const m = v => '$' + n(v);
+const pc = v => (v * 100).toFixed(2) + ' %';
+const get = p => p.split('.').reduce((o, k) => o[k], st);
+const set = (p, v) => { const ks = p.split('.'); const l = ks.pop(); ks.reduce((o, k) => o[k], st)[l] = v; };
+const fd = (s, w) => new Date(s + 'T12:00:00Z').toLocaleDateString('es-MX', Object.assign({day:'numeric', month:'short', timeZone:'UTC'}, w ? {weekday:'short'} : {}));
+const SHORT = {extra:'Semanas extra Unión', roQna:'Quincenas Otro trabajo', adel:'Semanas de descanso', ucAgui:'Aguinaldo Unión', ucPtu:'PTU Unión', fAgui:'Aguinaldo por fuera', fPtu:'PTU por fuera', roAgui:'Aguinaldo Otro trabajo'};
+let pend = null;
+
+document.querySelectorAll('.mod').forEach(el => [['12px','12px'],['12px',null],[null,'12px'],[null,null]].forEach((p, i) => {
+  const s = document.createElement('i'); s.className = 'scr'; s.style.setProperty('--r', [35, 110, 70, 160][i] + 'deg');
+  s.style[p[0] ? 'top' : 'bottom'] = '12px'; s.style[p[1] ? 'left' : 'right'] = '12px'; el.appendChild(s);
+}));
+
+function bind() {
+  document.querySelectorAll('[data-k]').forEach(el => {
+    const v = get(el.dataset.k);
+    if (el.type === 'checkbox') el.checked = !!v;
+    else el.value = (el.dataset.blank && !v) ? '' : String(v);
+  });
+}
+function tk(title, what, rows) {
+  return '<div class="tk"><h3>' + title + '</h3><p>' + what + '</p><table><tbody>' + rows.filter(Boolean).map(r =>
+    '<tr class="' + (r[2] || '') + '"><td' + (r[1] === null ? ' colspan="2"' : '') + '>' + r[0] + '</td>' + (r[1] === null ? '' : '<td>' + r[1] + '</td>') + '</tr>').join('') + '</tbody></table></div>';
+}
+const chk = d => d === 0 ? '<span class="ok">✓ cuadra</span>' : '<span class="wn">dif. ' + (d < 0 ? '−' : '+') + m(Math.abs(d)) + '</span>';
+function sueldoRows(s, quien) {
+  if (!s) return [['Captura el bruto o el neto para ver el cálculo.', null]];
+  const p = s.modelo, rows = [];
+  const fx = s.dias === 7 ? 'bruto ÷ 7' : st.par.sdQna === 'mes' ? 'bruto × 2 = ' + m(s.bruto * 2) + ' al mes ÷ 30.4' : 'bruto ÷ 15';
+  const sdRow = ['Salario diario<small>' + fx + '</small>', m(s.SD), 'sum'];
+  if (s.modo === 'bruto') {
+    rows.push(['Sueldo bruto ' + quien + ' capturado', m(s.bruto), 'sum'], sdRow,
+      ['Referencia: tu neto estimado', null, 'hd'],
+      ['ISR según tarifa<small>límite ' + m(p.li) + ' · cuota ' + m(p.cuota) + ' · ' + p.pct.toFixed(2) + ' %</small>', m(p.isrTarifa)],
+      ['− Subsidio para el empleo', m(p.subAplicado)], ['− ISR retenido', m(p.isrRet)],
+      p.imss.total ? ['− IMSS estimado', m(p.imss.total)] : null,
+      ['= Neto estimado', m(p.neto), 'sum']);
+  } else if (s.modo === 'recibo') {
+    rows.push(['Te depositan', m(s.neto)], ['+ ISR retenido', m(s.isr)], ['+ IMSS retenido', m(s.imss)]);
+    if (s.otras) rows.push(['+ Otros descuentos', m(s.otras)]);
+    rows.push(['= Sueldo bruto ' + quien, m(s.bruto), 'sum'], sdRow);
+    rows.push(['Comprobación con tarifa 2026', null, 'hd'],
+      ['ISR según tarifa<small>límite ' + m(p.li) + ' · cuota ' + m(p.cuota) + ' · ' + p.pct.toFixed(2) + ' %</small>', m(p.isrTarifa)],
+      ['− Subsidio para el empleo', m(p.subAplicado)],
+      ['= ISR que debe retenerse', m(p.isrRet)], ['Contra tu recibo', chk(C.r2(p.isrRet - s.isr))],
+      ['IMSS estimado<small>salario base ' + m(p.imss.sbc) + ' (factor ' + st.par.factor + ')</small>', m(p.imss.total)], ['Contra tu recibo', chk(C.r2(p.imss.total - s.imss))]);
+  } else {
+    rows.push(['Te depositan', m(s.neto)], ['Sueldo bruto que da ese neto<small>buscado al centavo con la tarifa 2026</small>', m(s.bruto), 'sum'], sdRow,
+      ['Comprobación', null, 'hd'],
+      ['ISR según tarifa<small>límite ' + m(p.li) + ' · cuota ' + m(p.cuota) + ' · ' + p.pct.toFixed(2) + ' %</small>', m(p.isrTarifa)],
+      ['− Subsidio para el empleo', m(p.subAplicado)], ['− ISR retenido (estimado)', m(p.isrRet)],
+      p.imss.total ? ['− IMSS estimado', m(p.imss.total)] : null,
+      ['= Neto recalculado', m(p.neto), 'sum'], ['Contra lo que capturaste', chk(s.dif)]);
+  }
+  return rows;
+}
+function gratRows(g, tope) {
+  const r = [['Exento: ' + tope + ' UMA', '− ' + m(g.exento)], ['Parte que paga ISR', m(g.gravado), 'sum']];
+  if (g.gravado > 0) {
+    if (st.par.metodo === '174') r.push(['Cómo sale la tasa (art. 174)', null, 'hd'], ['Sueldo mensual normal<small>salario diario × 30.4</small>', m(g.ordMensual), 'ind'],
+      ['Gravado llevado a un mes<small>÷ 365 × 30.4</small>', m(g.prop), 'ind'], ['ISR del mes con eso', m(g.isrTot), 'ind'], ['ISR del mes sin eso', m(g.isrOrd), 'ind'],
+      ['Diferencia ÷ gravado mensual', pc(g.tasa), 'ind']);
+    else r.push(['ISR del mes con el pago', m(g.isrTot), 'ind'], ['ISR del mes sin el pago', m(g.isrOrd), 'ind']);
+  }
+  r.push(['ISR (' + pc(g.tasa) + ' sobre lo gravado)', m(g.isr)]);
+  return r;
+}
+function render() {
+  const R = C.calcular(st);
+  window.__R = R;
+  $('#total').textContent = n(R.total);
+  const on = R.lineas.filter(l => st.incl[l.k]);
+  $('#lsub1').textContent = on.length + ' de ' + R.lineas.length + ' conceptos';
+  $('#lsub2').textContent = R.nAdel + ' semanas adelantadas';
+  const sem = R.lineas.filter(l => ['adel', 'extra', 'roQna'].includes(l.k) && st.incl[l.k]).reduce((s, l) => s + l.v, 0);
+  const pres = R.total - sem;
+  $('#find').innerHTML = R.total > 0 ? 'De ese total, <b>' + m(sem) + '</b> son sueldo (' + R.nAdel + ' semanas adelantadas' + (R.nExtra ? ', ' + R.nExtra + ' extra' : '') + (R.nQna ? ' y ' + R.nQna + (R.nQna > 1 ? ' quincenas' : ' quincena') + ' de Otro trabajo' : '') + ') y <b>' + m(pres) + '</b> son aguinaldos y PTU.' : 'Captura tus netos para ver el total.';
+
+  $('#bank').innerHTML = R.lineas.map(l => '<label class="tg"><input type="checkbox" class="sw" data-k="incl.' + l.k + '"' + (st.incl[l.k] ? ' checked' : '') + '><span class="led' + (st.incl[l.k] ? ' on' : '') + '"></span><span>' + SHORT[l.k] + '</span></label>').join('');
+  let tape = '<div class="th"><span>Diciembre ' + st.year + '</span><span>neto MXN</span></div>';
+  ['Unión de Crédito', 'Por fuera', 'Otro trabajo'].forEach(g => {
+    const ls = R.lineas.filter(l => l.g === g && st.incl[l.k] && l.v !== 0); if (!ls.length) return;
+    tape += '<div class="tg2"><span>' + g + '</span><span>' + n(ls.reduce((s, l) => s + l.v, 0)) + '</span></div>';
+    tape += ls.map(l => '<div class="tl"><span>' + l.t + '</span><span class="v">' + n(l.v) + ' +</span>' + (l.det ? l.det.map(d => '<small>' + d.t + ': ' + d.k + ' × ' + n(d.u) + ' = ' + n(d.v) + '</small>').join('') : '<small>' + l.e + '</small>') + '</div>').join('');
+  });
+  tape += '<div class="tt"><span>Total</span><span>' + n(R.total) + ' *</span></div>';
+  $('#tape').innerHTML = tape;
+
+  const s = R.semUC, f = R.qnaRO;
+  $('#miniUC').innerHTML = s ? '<span>Bruto semanal ' + m(s.bruto) + '</span><span>Diario ' + m(s.SD) + '</span>' : '<span>Sin dato</span>';
+  $('#miniEX').innerHTML = '<span>Cada semana extra</span><span>' + m(R.semanal) + '</span>';
+  $('#miniFU').innerHTML = '<span>Diario por fuera</span><span>' + m(R.sdFuera) + '</span>';
+
+  // Calendario
+  const y = st.year, pays = new Set(R.pagos.ordinarios);
+  const inR = d => st.ranges.some(r => { const a = r.a < r.b ? r.a : r.b, b = r.a < r.b ? r.b : r.a; return d >= a && d <= b; });
+  $('#months').innerHTML = [[y, 11], [y + 1, 0]].map(([yy, mm]) => {
+    const first = new Date(Date.UTC(yy, mm, 1)), days = new Date(Date.UTC(yy, mm + 1, 0)).getUTCDate();
+    const name = first.toLocaleDateString('es-MX', {month:'long', year:'numeric', timeZone:'UTC'});
+    let c = ['L','M','M','J','V','S','D'].map(d => '<div class="dw">' + d + '</div>').join('') + '<span class="d out"></span>'.repeat((first.getUTCDay() + 6) % 7);
+    for (let d = 1; d <= days; d++) {
+      const ds = yy + '-' + String(mm + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      const isPay = new Date(Date.UTC(yy, mm, d)).getUTCDay() === st.payDow;
+      c += '<button type="button" class="d' + (inR(ds) ? ' vac' : '') + (isPay ? ' pay' : '') + (pend === ds ? ' sel' : '') + '" data-day="' + ds + '" aria-pressed="' + inR(ds) + '" aria-label="' + fd(ds, 1) + (isPay ? ', día de pago' : '') + '">' + d + '</button>';
+    }
+    return '<div class="mo"><h3>' + name.charAt(0).toUpperCase() + name.slice(1) + '</h3><div class="g">' + c + '</div></div>';
+  }).join('');
+  $('#rangos').innerHTML = R.pagos.descansos.length ? R.pagos.descansos.map((d, i) =>
+    '<div class="rd"><div class="rdx"><span>DESCANSO</span><button type="button" class="key" data-del="' + i + '">Quitar</button></div><div class="big">' + fd(d.a).toUpperCase() + ' – ' + fd(d.b).toUpperCase() + '</div><div>' + d.dias + ' DÍAS = ' + d.semanas + ' SEMANAS ADELANTADAS</div></div>').join('')
+    : '<div class="rd"><div class="big">SIN DESCANSO</div><div>Toca dos días en el calendario</div></div>';
+  const prev = R.pagos.descansos.map(d => d.previo).filter(Boolean);
+  $('#semRes').innerHTML = '<p class="help">Semanas de descanso adelantadas: <b>' + R.nAdel + '</b>' + (prev.length ? '; normalmente te las pagan el ' + prev.map(d => fd(d, 1)).join(' y el ') : '') + '. Cada una vale ' + m(st.uc.neto) + ' de nómina + ' + m(st.fuera.neto) + ' por fuera.</p>';
+
+  // Tickets
+  let h = '';
+  h += tk('Unión: tu sueldo semanal', s && s.modo === 'recibo' ? 'Con tu recibo se reconstruye el sueldo bruto, que es la base del aguinaldo y la PTU.' : 'Sin retenciones capturadas, el bruto se estima con la tarifa 2026.', sueldoRows(s, 'semanal'));
+  if (R.aguiUC) { const a = R.aguiUC; h += tk('Unión: aguinaldo de nómina', 'Lo que marca la ley: 15 días de salario, con su ISR.', [['Salario diario bruto', m(a.SD)], ['× días de aguinaldo' + (a.laborados < 365 ? '<small>proporcional a ' + a.laborados + ' días trabajados</small>' : ''), String(a.dias)], ['= Aguinaldo bruto', m(a.bruto), 'sum']].concat(gratRows(a, 30)).concat([['Aguinaldo que recibes', m(a.neto), 'sum']])); }
+  if (R.ptuUC) { const p = R.ptuUC; h += tk('Unión: PTU de 30 días libres', 'Primero se fija lo que debes recibir y luego se calcula el bruto que cubre el ISR.', [['Salario diario ' + st.uc.ptuBase, m(p.basePTU)], ['× días de PTU', String(st.uc.ptuDias)], ['= Lo que debes recibir', m(p.objetivo), 'sum'], ['PTU bruta que paga la empresa', m(p.bruto)]].concat(gratRows(p, 15)).concat([p.extra ? ['Otra retención absorbida', m(p.extra)] : null, ['PTU que recibes', m(p.neto), 'sum'], ['Contra lo que debes recibir', chk(p.difNeto)]])); }
+  h += tk('Por fuera: aguinaldo y PTU', 'Sin descuentos de ningún tipo.', [['Te dan por semana', m(st.fuera.neto)], ['÷ 7 = salario diario', m(R.sdFuera), 'sum'], ['Aguinaldo<small>' + st.fuera.aguiDias + ' días × ' + m(R.sdFuera) + '</small>', m(R.aguiFuera)], ['PTU<small>' + st.fuera.ptuDias + ' días × ' + m(R.sdFuera) + '</small>', m(R.ptuFuera)], ['Total por fuera', m(R.aguiFuera + R.ptuFuera), 'sum']]);
+  h += tk('Unión: semanas de descanso adelantadas', 'Las semanas que te pagan antes de irte de descanso. Cada una incluye nómina y por fuera.', [['Semanas de descanso', String(R.nAdel)], ['Nómina<small>' + R.nAdel + ' × ' + m(st.uc.neto) + '</small>', m(R.lineas[0].det[0].v)], ['Por fuera<small>' + R.nAdel + ' × ' + m(st.fuera.neto) + '</small>', m(R.lineas[0].det[1].v)], ['Total adelantado', m(R.lineas[0].v), 'sum']]);
+  if (R.nExtra || R.nQna) {
+    const ex = R.lineas.find(l => l.k === 'extra'), q = R.lineas.find(l => l.k === 'roQna');
+    h += tk('Pagos extra en diciembre', 'Semanas normales de la Unión que agregaste a mano.', [
+      R.nExtra ? ['Unión: semanas extra', null, 'hd'] : null,
+      R.nExtra ? ['Nómina<small>' + R.nExtra + ' × ' + m(st.uc.neto) + '</small>', m(ex.det[0].v)] : null,
+      R.nExtra ? ['Por fuera<small>' + R.nExtra + ' × ' + m(st.fuera.neto) + '</small>', m(ex.det[1].v)] : null,
+      R.nQna ? ['Otro trabajo: quincenas', null, 'hd'] : null,
+      R.nQna ? ['Neto por quincena<small>' + (R.qnaEst ? 'estimado con tu bruto de ' + m(R.qnaRO ? R.qnaRO.bruto : 0) + '; si capturas tu neto real, se usa ese' : 'el que capturaste') + '</small>', m(R.qnaNeto)] : null,
+      R.nQna ? ['× quincenas', String(R.nQna)] : null,
+      ['Total pagos extra', m((R.nExtra ? ex.v : 0) + (R.nQna ? q.v : 0)), 'sum']]);
+  }
+  $('#tks').innerHTML = h;
+  if (s) {
+    const p = s.modelo;
+    $('#mm1').textContent = s.modo === 'recibo' ? m(s.neto) + ' + ' + m(s.isr) + ' de ISR + ' + m(s.imss) + ' de IMSS' + (s.otras ? ' + ' + m(s.otras) + ' de otros descuentos' : '') + ' = ' + m(s.bruto) + ' a la semana. Entre 7 días da tu salario diario de ' + m(s.SD) + '.' : 'como no capturaste retenciones, se busca el salario diario cuyo neto da ' + m(s.neto) + ': ' + m(s.SD) + ' (bruto semanal ' + m(s.bruto) + ').';
+    $('#mm2').textContent = 'Con la tarifa semanal 2026 del SAT, ese sueldo causa ' + m(p.isrTarifa) + ' de ISR; menos ' + m(p.subAplicado) + ' de subsidio para el empleo quedan ' + m(p.isrRet) + (s.modo === 'recibo' ? (C.r2(p.isrRet - s.isr) === 0 ? ', justo lo de tu recibo.' : ' contra ' + m(s.isr) + ' de tu recibo.') : '.');
+  }
+
+  if (!$('#tarifas').innerHTML) {
+    const tt = (cap, T) => '<div class="scroll"><table><caption>' + cap + '</caption><tbody><tr><td>Límite inferior</td><td>Cuota fija</td><td>%</td></tr>' + T.map(r => '<tr><td>' + n(r[0]) + '</td><td>' + n(r[1]) + '</td><td>' + r[2].toFixed(2) + '</td></tr>').join('') + '</tbody></table></div>';
+    $('#tarifas').innerHTML = tt('Tarifa ISR semanal 2026', C.T7) + tt('Tarifa ISR quincenal 2026', C.T15) + tt('Tarifa ISR mensual 2026', C.TM);
+  }
+}
+
+document.addEventListener('input', e => {
+  const el = e.target; if (!el.dataset || !el.dataset.k) return;
+  let v;
+  if (el.type === 'checkbox') v = el.checked;
+  else if (el.type === 'number') v = el.value === '' ? 0 : +el.value;
+  else if (el.dataset.num) v = +el.value;
+  else v = el.value;
+  set(el.dataset.k, v); save(); render();
+});
+document.addEventListener('click', e => {
+  const day = e.target.closest('[data-day]');
+  if (day) {
+    const d = day.dataset.day;
+    if (!pend) { pend = d; $('#msg').textContent = 'Ahora toca el último día del descanso.'; }
+    else { st.ranges.push({a: pend < d ? pend : d, b: pend < d ? d : pend}); pend = null; save(); $('#msg').textContent = 'Descanso agregado.'; }
+    render(); return;
+  }
+  const del = e.target.closest('[data-del]');
+  if (del) { st.ranges.splice(+del.dataset.del, 1); save(); render(); }
+});
+$('#radd').addEventListener('click', () => {
+  const a = $('#ra').value, b = $('#rb').value;
+  if (!a || !b) { $('#msg').textContent = 'Captura las dos fechas del descanso.'; return; }
+  st.ranges.push({a: a < b ? a : b, b: a < b ? b : a}); $('#ra').value = ''; $('#rb').value = ''; save(); render();
+});
+$('#reset').addEventListener('click', () => { st = clone(DEF); pend = null; save(); bind(); render(); $('#msg').textContent = 'Se restablecieron los datos de ejemplo.'; });
+$('#copy').addEventListener('click', () => {
+  const R = window.__R;
+  const txt = ['Ingresos estimados diciembre ' + st.year, ''].concat(R.lineas.filter(l => st.incl[l.k]).map(l => l.g + ' | ' + l.t + ': ' + m(l.v)), ['', 'TOTAL: ' + m(R.total)]).join('\n');
+  try { navigator.clipboard.writeText(txt).then(() => { $('#msg').textContent = 'Resumen copiado.'; }, () => { $('#msg').textContent = 'No se pudo copiar en este navegador.'; }); }
+  catch (err) { $('#msg').textContent = 'No se pudo copiar en este navegador.'; }
+});
+// ---------- Ticket impreso (canvas → PNG) ----------
+const FM = '"IBM Plex Mono", ui-monospace, monospace';
+const fnt = (w, z) => w + ' ' + z + 'px ' + FM;
+function tkItems(R) {
+  const it = [], now = new Date();
+  const p2 = x => String(x).padStart(2, '0');
+  it.push({t:'c', x:'SUMADORA DE FIN DE AÑO', w:600, z:15});
+  it.push({t:'c', x:'Ingresos de diciembre ' + st.year, w:400, z:13});
+  it.push({t:'c', x:'Impreso ' + p2(now.getDate()) + '/' + p2(now.getMonth() + 1) + '/' + now.getFullYear() + ' ' + p2(now.getHours()) + ':' + p2(now.getMinutes()), w:400, z:11.5, c:'#6a7076'});
+  it.push({t:'sep'});
+  const sub = {
+    adel: l => l.det.map(d => [d.t + ' ' + d.k + ' × ' + n(d.u), n(d.v)]),
+    extra: l => l.det.map(d => [d.t + ' ' + d.k + ' × ' + n(d.u), n(d.v)]),
+    ucAgui: () => R.aguiUC ? [['Bruto ' + n(R.aguiUC.bruto) + ' − ISR ' + n(R.aguiUC.isr), '']] : [],
+    ucPtu: () => R.ptuUC ? [[st.uc.ptuDias + ' días libres × ' + n(R.ptuUC.basePTU), ''], ['Bruto ' + n(R.ptuUC.bruto) + ' − ISR ' + n(R.ptuUC.isr), '']] : [],
+    fAgui: () => [[st.fuera.aguiDias + ' días × ' + n(R.sdFuera), '']],
+    fPtu: () => [[st.fuera.ptuDias + ' días × ' + n(R.sdFuera), '']],
+    roAgui: () => R.aguiRO ? [['Bruto ' + n(R.aguiRO.bruto) + ' − ISR ' + n(R.aguiRO.isr), '']] : [],
+    roQna: () => [[R.nQna + ' × ' + n(R.qnaNeto) + (R.qnaEst ? ' (estimado)' : ''), '']]
+  };
+  ['Unión de Crédito', 'Por fuera', 'Otro trabajo'].forEach(g => {
+    const ls = R.lineas.filter(l => l.g === g && st.incl[l.k] && l.v !== 0); if (!ls.length) return;
+    it.push({t:'l', a:g.toUpperCase(), b:n(ls.reduce((s, l) => s + l.v, 0)), w:600, z:13, gap:6});
+    ls.forEach(l => {
+      it.push({t:'l', a:l.t, b:n(l.v), w:500, z:13});
+      (sub[l.k] ? sub[l.k](l) : []).forEach(r => it.push({t:'l', a:'  ' + r[0], b:r[1], w:400, z:11.5, c:'#6a7076'}));
+    });
+    it.push({t:'sp', h:4});
+  });
+  it.push({t:'dsep'});
+  it.push({t:'l', a:'TOTAL', b:'$' + n(R.total), w:600, z:21});
+  it.push({t:'dsep'});
+  R.pagos.descansos.forEach(d => it.push({t:'l', a:'Descanso ' + fd(d.a) + ' – ' + fd(d.b) + ' · ' + d.semanas + ' semanas', b:'', w:400, z:11.5, c:'#6a7076'}));
+  it.push({t:'l', a:'Cifras netas en MXN con parámetros fiscales 2026. Estimación: mandan los recibos timbrados.', b:'', w:400, z:11.5, c:'#6a7076'});
+  it.push({t:'sp', h:8});
+  it.push({t:'bar'});
+  it.push({t:'c', x:'¡Felices fiestas!', w:500, z:13});
+  return it;
+}
+function wrapT(ctx, txt, maxW) {
+  const out = []; let cur = '';
+  txt.split(' ').forEach((w, i) => {
+    const t = cur ? cur + ' ' + w : w;
+    if (ctx.measureText(t).width <= maxW || !cur) cur = t; else { out.push(cur); cur = (txt.startsWith('  ') ? '  ' : '') + w; }
+  });
+  out.push(cur); return out;
+}
+function tkLayout(ctx, items, PW, P, draw, ox, oy) {
+  let y = oy + 14 + P;
+  const x0 = ox + P, x1 = ox + PW - P;
+  items.forEach(it => {
+    if (it.t === 'sp') { y += it.h; return; }
+    if (it.t === 'sep' || it.t === 'dsep') {
+      if (draw) {
+        ctx.strokeStyle = '#22262a'; ctx.lineWidth = 1;
+        if (it.t === 'sep') ctx.setLineDash([4, 3]);
+        [0, it.t === 'dsep' ? 3 : null].forEach(d => { if (d === null) return; ctx.beginPath(); ctx.moveTo(x0, y + 6 + d); ctx.lineTo(x1, y + 6 + d); ctx.stroke(); });
+        ctx.setLineDash([]);
+      }
+      y += 16; return;
+    }
+    if (it.t === 'bar') {
+      if (draw) {
+        let seed = Math.round((window.__R.total || 1) * 100) % 2147483647 || 7, x = x0 + 30;
+        ctx.fillStyle = '#22262a';
+        while (x < x1 - 30) { seed = seed * 16807 % 2147483647; const w = 1 + seed % 3; if (seed % 5 > 1) ctx.fillRect(x, y, w, 34); x += w + 1 + (seed >> 3) % 2; }
+      }
+      y += 44; return;
+    }
+    ctx.font = fnt(it.w, it.z);
+    const lh = Math.round(it.z * 1.45);
+    if (it.t === 'c') {
+      if (draw) { ctx.fillStyle = it.c || '#22262a'; ctx.textAlign = 'center'; ctx.fillText(it.x, ox + PW / 2, y); ctx.textAlign = 'left'; }
+      y += lh; return;
+    }
+    y += it.gap || 0;
+    const bw = it.b ? ctx.measureText(it.b).width + 12 : 0;
+    const lines = wrapT(ctx, it.a, x1 - x0 - bw);
+    if (draw) {
+      ctx.fillStyle = it.c || '#22262a';
+      lines.forEach((ln, i) => ctx.fillText(ln, x0, y + i * lh));
+      if (it.b) { ctx.textAlign = 'right'; ctx.fillText(it.b, x1, y); ctx.textAlign = 'left'; }
+    }
+    y += lh * lines.length + 2;
+  });
+  return y + P + 14 - oy;
+}
+function tkCanvas(items, M) {
+  const S = 3, PW = 360, P = 18;
+  const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+  ctx.textBaseline = 'top';
+  const H = tkLayout(ctx, items, PW, P, false, 0, 0);
+  cv.width = (PW + 2 * M) * S; cv.height = (H + 2 * M) * S;
+  ctx.scale(S, S); ctx.textBaseline = 'top';
+  if (M) { ctx.fillStyle = '#e4e1da'; ctx.fillRect(0, 0, PW + 2 * M, H + 2 * M); }
+  const t = 6, d = 5, ox = M, oy = M;
+  ctx.beginPath(); ctx.moveTo(ox, oy + d);
+  for (let x = ox; x < ox + PW; x += t * 2) { ctx.lineTo(Math.min(x + t, ox + PW), oy); ctx.lineTo(Math.min(x + 2 * t, ox + PW), oy + d); }
+  ctx.lineTo(ox + PW, oy + H - d);
+  for (let x = ox + PW; x > ox; x -= t * 2) { ctx.lineTo(Math.max(x - t, ox), oy + H); ctx.lineTo(Math.max(x - 2 * t, ox), oy + H - d); }
+  ctx.closePath();
+  ctx.save(); if (M) { ctx.shadowColor = 'rgba(0,0,0,.22)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 3; }
+  ctx.fillStyle = '#fcfaf3'; ctx.fill(); ctx.restore();
+  tkLayout(ctx, items, PW, P, true, ox, oy);
+  return cv;
+}
+let shareCv = null, shareBlob = null, dlNS = null, printing = false;
+$('#tkSave').hidden = false;
+async function printTicket() {
+  if (printing) return; printing = true;
+  const box = $('#pbox'), feed = $('#feed'), img = $('#tkImg');
+  $('#pst').textContent = 'Imprimiendo…'; $('#tkMsg').textContent = ''; $('#tkActs').hidden = true;
+  $('#pled').classList.add('on');
+  try { await Promise.all(['400 13px', '500 13px', '600 13px'].map(f => document.fonts.load(f + ' "IBM Plex Mono"'))); } catch (e) {}
+  const items = tkItems(window.__R);
+  const screen = tkCanvas(items, 0);
+  shareCv = tkCanvas(items, 22); shareBlob = null;
+  shareCv.toBlob(bl => { shareBlob = bl; }, 'image/png');
+  feed.classList.remove('on'); box.classList.remove('printing'); feed.style.height = '';
+  img.onload = () => {
+    feed.style.setProperty('--h', img.offsetHeight + 'px');
+    void feed.offsetWidth;
+    box.classList.add('printing');
+    const done = () => {
+      box.classList.remove('printing'); feed.classList.add('on'); printing = false;
+      $('#pst').textContent = 'Ticket listo'; $('#pled').classList.remove('on');
+      $('#tkActs').hidden = false;
+      $('#tkMsg').textContent = 'Toca "Copiar imagen" y pégalo en WhatsApp. En el celular también puedes mantener presionado el ticket.';
+    };
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) done(); else setTimeout(done, 2850);
+  };
+  img.src = screen.toDataURL('image/png');
+}
+$('#print').addEventListener('click', printTicket);
+$('#goPrint').addEventListener('click', () => { $('#ticket').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'}); printTicket(); });
+const pngBlob = () => shareBlob ? Promise.resolve(shareBlob) : new Promise((res, rej) => shareCv.toBlob(b => b ? res(shareBlob = b) : rej(new Error('blob')), 'image/png'));
+$('#tkCopy').addEventListener('click', () => {
+  if (!shareCv) return;
+  const fail = () => { $('#tkMsg').textContent = 'Este navegador no deja copiar imágenes aquí. Usa "Guardar o compartir" o mantén presionado el ticket.'; };
+  try {
+    if (!window.ClipboardItem || !navigator.clipboard || !navigator.clipboard.write) { fail(); return; }
+    navigator.clipboard.write([new ClipboardItem({'image/png': shareBlob || pngBlob()})]).then(() => { $('#tkMsg').textContent = 'Imagen copiada. Ve a WhatsApp y pega (Ctrl + V).'; }, fail);
+  } catch (e) { fail(); }
+});
+$('#tkSave').addEventListener('click', async () => {
+  if (!shareCv) return;
+  const name = 'ticket-diciembre-' + st.year + '.png';
+  try {
+    const b = await pngBlob();
+    if (dlNS) { await dlNS.save({filename: name, data: b}); $('#tkMsg').textContent = 'Listo, ya puedes mandarlo por WhatsApp.'; return; }
+    const file = typeof File === 'function' ? new File([b], name, {type: 'image/png'}) : null;
+    if (file && navigator.canShare && navigator.canShare({files: [file]})) { await navigator.share({files: [file], title: 'Ticket diciembre ' + st.year}); $('#tkMsg').textContent = 'Listo.'; return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    $('#tkMsg').textContent = 'Imagen descargada; mándala por WhatsApp desde tus archivos.';
+  } catch (e) { $('#tkMsg').textContent = e && (e.code === 'declined' || e.name === 'AbortError') ? 'Se canceló.' : 'No se pudo guardar aquí; mantén presionado el ticket para copiarlo.'; }
+});
+bind();
+render();
+}
+</script>
+</body>
+</html>
