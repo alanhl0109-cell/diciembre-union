@@ -46,7 +46,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.18),0 
 .led{display:inline-block;width:10px;height:10px;border-radius:50%;background:#5a3a2a;box-shadow:inset 0 1px 2px rgba(0,0,0,.6);flex:none}
 .led.on,input:checked+.led{background:radial-gradient(circle at 40% 35%,#ffd2b0,var(--led) 55%,#c4500f);box-shadow:0 0 8px var(--led),0 0 2px var(--led)}
 .led.g{background:radial-gradient(circle at 40% 35%,#d8ffdf,var(--grn) 55%,#2c8a3c);box-shadow:0 0 8px var(--grn)}
-.top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"lcd ctrl" "tape ctrl";gap:22px 30px;align-items:start}
+.top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-rows:auto minmax(0,1fr);grid-template-areas:"lcd ctrl" "tape ctrl";gap:22px 30px;align-items:start}
 .a-lcd{grid-area:lcd}.a-ctrl{grid-area:ctrl}.a-tape{grid-area:tape}
 .bezel{background:linear-gradient(180deg,#2c2f33,#1c1e21);border-radius:12px;padding:14px;box-shadow:inset 0 2px 3px rgba(0,0,0,.6),0 1px 0 var(--emb)}
 .lcd{position:relative;border-radius:5px;padding:12px 16px 12px;background:linear-gradient(170deg,var(--lcd1),var(--lcd2));color:var(--lcdink);box-shadow:inset 0 3px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(0,0,0,.25);font-family:"Share Tech Mono",ui-monospace,monospace}
@@ -198,7 +198,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.2),0 2
 .cmsg{font-size:13px;color:var(--mute);min-height:18px;margin:8px 2px 0;text-align:center}
 @media(max-width:600px){.calc{left:10px;right:10px;bottom:10px;width:auto}}
 @media(prefers-reduced-motion:reduce){.calc{animation:none}}
-@media(max-width:900px){.top{grid-template-columns:minmax(0,1fr);grid-template-areas:"lcd" "ctrl" "tape"}.cal{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:900px){.top{grid-template-rows:none;grid-template-columns:minmax(0,1fr);grid-template-areas:"lcd" "ctrl" "tape"}.cal{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:560px){.months{grid-template-columns:minmax(0,1fr)}.tape{margin:-5px 8px 0;padding:16px 12px 24px}.r2{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.key,.sw::before,details.svc summary::before{transition:none}}
 </style>
